@@ -57,13 +57,15 @@
                                 <span asp-validation-for="Ticket.Email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label for="inputProjectLeader">Project Leader</label>
+                                <label for="inputProjectLeader">შექმნის დრო</label>
                                 <input asp-for="Ticket.CreateDate" class="form-control" />
                                 <span asp-validation-for="Ticket.CreateDate" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label for="inputStatus">სტატუსი</label>
                                 <select class="form-control custom-select">
+                                    <input asp-for="Ticket.Status" class="form-control" />
+                                    <span asp-validation-for="Ticket.Status" class="text-danger"></span>
                                     <option selected disabled>Select one</option>
                                     <option>ღია</option>
                                     <option>Canceled</option>

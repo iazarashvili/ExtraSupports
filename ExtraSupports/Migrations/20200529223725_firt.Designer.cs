@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExtraSupports.Migrations
 {
     [DbContext(typeof(ExtraSupportsContext))]
-    [Migration("20200522215829_First")]
-    partial class First
+    [Migration("20200529223725_firt")]
+    partial class firt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,9 @@ namespace ExtraSupports.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
