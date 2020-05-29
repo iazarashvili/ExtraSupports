@@ -5,50 +5,87 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Ticket</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Ticket.Title" class="control-label"></label>
-                <input asp-for="Ticket.Title" class="form-control" />
-                <span asp-validation-for="Ticket.Title" class="text-danger"></span>
+<div class="content">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1>ბილეთის დამატება</h1>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Ticket.Description" class="control-label"></label>
-                <input asp-for="Ticket.Description" class="form-control" />
-                <span asp-validation-for="Ticket.Description" class="text-danger"></span>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">ბილეთი</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label for="inputName">სათაური</label>
+                                <input asp-for="Ticket.Title" class="form-control" />
+                                <span asp-validation-for="Ticket.Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputDescription">აღწერა</label>
+                                <input asp-for="Ticket.Description" class="form-control" />
+                                <span asp-validation-for="Ticket.Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputClientCompany">ტელეფონი</label>
+                                <input asp-for="Ticket.PhoneNumber" class="form-control" />
+                                <span asp-validation-for="Ticket.PhoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputClientCompany">ელ. ფოსტა</label>
+                                <input asp-for="Ticket.Email" class="form-control" />
+                                <span asp-validation-for="Ticket.Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputProjectLeader">Project Leader</label>
+                                <input asp-for="Ticket.CreateDate" class="form-control" />
+                                <span asp-validation-for="Ticket.CreateDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputStatus">სტატუსი</label>
+                                <select class="form-control custom-select">
+                                    <option selected disabled>Select one</option>
+                                    <option>ღია</option>
+                                    <option>Canceled</option>
+                                    <option>Success</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-12">
+                                    <a href="#" class="btn btn-secondary">Cancel</a>
+                                    <input type="submit" value="Create" class="btn btn-success float-right">
+                                </div>
+                            </div>
+                        </form>
+                      
+                    </div>
+                    <!-- /.card-body -->
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Ticket.PhoneNumber" class="control-label"></label>
-                <input asp-for="Ticket.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Ticket.PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ticket.Email" class="control-label"></label>
-                <input asp-for="Ticket.Email" class="form-control" />
-                <span asp-validation-for="Ticket.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ticket.CreateDate" class="control-label"></label>
-                <input asp-for="Ticket.CreateDate" class="form-control" />
-                <span asp-validation-for="Ticket.CreateDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+    </section>
+    <!-- /.content -->
 </div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
