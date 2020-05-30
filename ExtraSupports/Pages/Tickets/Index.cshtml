@@ -73,10 +73,23 @@
                                     <td>@Html.DisplayFor(modelItem => item.CreateDate)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                     <td>
-                                        <a asp-page="./Edit" asp-route-id="@item.TicketId">Edit</a> |
-                                        <a asp-page="./Details" asp-route-id="@item.TicketId">Details</a> |
-                                        <a asp-page="./Delete" asp-route-id="@item.TicketId">Delete</a>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success btn-flat">Action</button>
+                                            <button type="button" class="btn btn-success btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                                <div class="dropdown-menu" role="menu" style="">
+                                                    <a class="dropdown-item" href="">დახურვა</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="" asp-page="./Delete" asp-route-id="@item.TicketId">წაშლა</a>
+                                                </div>
+                                            </button>
+                                        </div>
                                     </td>
+                                    @*<td>
+                                        <a class="dropdown-item" asp-page="./Edit" asp-route-id="@item.TicketId">Edit</a>
+                                        <button type="button" class="btn btn-danger"><a asp-page="./Details" asp-route-id="@item.TicketId">Details</a></button>
+                                        <button type="button" class="btn btn-danger"><a asp-page="./Delete" asp-route-id="@item.TicketId">Delete</a></button>
+                                    </td>*@
                                 </tr>
                                 }
                             </tbody>
