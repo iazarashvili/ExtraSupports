@@ -40,7 +40,7 @@
                 <div class="row" style="opacity:0.5")">
                     <div class="col-lg-6 contactcard">
                         <img src="https://image.flaticon.com/icons/svg/1612/1612229.svg" height="40" width="40" alt="Feature-Support-Icon fehlt" title="FeatureSenden" style="margin-bottom:1rem;" class="img-fluid" />
-                        <button class="btn btn-primary" style="background-color:green;" id="bug-button" onclick="displayItems()" Create Bug>Create Bug</button>
+                        <button class="btn btn-primary" style="background-color:#28A745;" id="bug-button" onclick="displayItems()" Create Bug>Create Bug</button>
                  
                     </div>
               </div>
@@ -116,7 +116,7 @@
                     <tbody>
                         @foreach (var item in Model.AllTickets)
                         {
-                        <tr role="row" class="odd" style="@(item.TicketState==Enums.TicketState.Active ? "background-color:red;" : "background-color:green;")">
+                        <tr role="row" class="odd" style="@(item.TicketState==Enums.TicketState.Active ? "background-color:#DC3545;" : "background-color:#17A2B8;")">
                             <td tabindex="0" class="sorting_1">@item.Title</td>
                             <td>@item.Description</td>
                             <td>@item.PhoneNumber</td>
@@ -126,7 +126,7 @@
                             <td>@item.TicketState</td>
                             <form method="post" asp-page-handler="ChangeTicketStatus">
                                 <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
-                                <td> <button id="btn_submit_Bug" type="submit" class="btn btn-success btn-lg" style="display:block">ChangetStatus</button></td>
+                                <td> <button id="btn_submit_Bug" type="submit" class="btn btn-success btn-sm" style="display:block">დახურვა</button></td>
                             </form>
 
 
