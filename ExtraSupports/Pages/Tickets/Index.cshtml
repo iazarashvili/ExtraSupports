@@ -122,7 +122,7 @@
                             <td>@item.PhoneNumber</td>
                             <td>@item.Email</td>
                             <td>@item.CreateDate</td>
-                            <td>@(item.DateFinished>DateTime.MinValue?item.DateFinished :null)</td>
+                            <td>@item.CloseComment</td>
                             <td>@item.TicketState</td>
                             <form method="post" asp-page-handler="ChangeTicketStatus">
                                 <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />

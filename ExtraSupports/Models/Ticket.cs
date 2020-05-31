@@ -14,6 +14,7 @@ namespace ExtraSupports.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string PhoneNumber { get; set; }
+        public string CloseComment { get; set; }
         public TicketState TicketState { get; set; } = TicketState.Active;
 
         public string Email { get; set; }
@@ -21,7 +22,6 @@ namespace ExtraSupports.Models
         [DataType(DataType.Date)]
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
-        public DateTime? DateFinished { get; set; }
         public Ticket()
         {
         }
@@ -35,7 +35,7 @@ namespace ExtraSupports.Models
             TicketState = ticket.TicketState;
             Email = ticket.Email;
             CreateDate = ticket.CreateDate;
-            DateFinished = ticket.DateFinished;
+            CloseComment = ticket.CloseComment;
         }
 
     }

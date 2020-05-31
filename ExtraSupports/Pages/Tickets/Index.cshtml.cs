@@ -10,7 +10,9 @@ namespace ExtraSupports.Pages.Tickets
 {
     public class IndexModel : PageModel
     {
-    
+
+        [BindProperty]
+        public string CloseComment { get; set; }
         [BindProperty]
         public string Title { get; set; }
         [BindProperty]
