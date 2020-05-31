@@ -42,7 +42,7 @@ namespace ExtraSupports.Helpers
             if(ticket != null)
             {
                 ticket.TicketState = TicketState.Finished;
-                ticket.DateFinished = DateTime.Now;
+               
                 allTickets.Update(ticket);
             }
         }
