@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ExtraSupports.Helpers;
+using ExtraSupports.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using ExtraSupports.Data;
 
 namespace ExtraSupports
 {
@@ -26,9 +21,9 @@ namespace ExtraSupports
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSingleton<IDatabaseHelper, DatabaseHelper>();
+            services.AddTransient<ITicketService, TicketService>();
 
-            services.AddDbContext<ExtraSupportsContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ExtraSupportsContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

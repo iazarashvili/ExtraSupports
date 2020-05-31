@@ -4,149 +4,190 @@
 @{
     ViewData["Title"] = "Index";
 }
-    <div class="card ">
-        <div class="card-header">
-            <h3 class="card-title">DataTable with default features</h3>
+<div class="card ">
+    <div class="card-header">
+        <h3 class="card-title">DataTable with default features</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body ">
+        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length" id="example1_length">
+                        <label>
+                            Show <select name="example1_length"
+                                         aria-controls="example1"
+                                         class="custom-select custom-select-sm form-control form-control-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select> entries
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div id="example1_filter" class="dataTables_filter">
+                        <label>
+                            Search:<input type="search"
+                                          class="form-control form-control-sm" placeholder="" aria-controls="example1">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!--show Category-->
+            <div >
+                <div class="row" style="opacity:0.5")">
+                    <div class="col-lg-6 contactcard">
+                        <img src="https://image.flaticon.com/icons/svg/1612/1612229.svg" height="40" width="40" alt="Feature-Support-Icon fehlt" title="FeatureSenden" style="margin-bottom:1rem;" class="img-fluid" />
+                        <button class="btn btn-primary" style="background-color:green;" id="bug-button" onclick="displayItems()" Create Bug>Create Bug</button>
+                 
+                    </div>
+              </div>
+            </div>
         </div>
-        <!-- /.card-header -->
-        <div class="card-body ">
-            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_length" id="example1_length">
-                            <label>
-                                Show <select name="example1_length"
-                                             aria-controls="example1"
-                                             class="custom-select custom-select-sm form-control form-control-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select> entries
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="example1_filter" class="dataTables_filter">
-                            <label>
-                                Search:<input type="search"
-                                              class="form-control form-control-sm" placeholder="" aria-controls="example1">
-                            </label>
+
+            <!--Creating ticket-->
+            <section style="display:none; margin-top:4rem;" id="formsection">
+                <div class="container">
+                    <div>
+                        <div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <form enctype="multipart/form-data" method="post">
+
+                                        <div id="ticketTitle" class="form-group" style="display:none">
+                                            <lable for="subject">Title</lable>
+                                            <input id="title" name="title" type="text" class="form-control" asp-for="Title" minlength="3" maxlength="1000" required />
+                                        </div>
+                                        <div id="Email" class="form-group" style="display:none">
+                                            <lable for="subject">Email</lable>
+                                            <input id="Email" name="Email" type="text" class="form-control" asp-for="Email" minlength="3" maxlength="1000" required />
+                                        </div>
+                                        <div id="PhoneNumber" class="form-group" style="display:none">
+                                            <lable for="subject">PhoneNumber</lable>
+                                            <input id="PhoneNumber" name="PhoneNumber" type="text" class="form-control" asp-for="PhoneNumber" minlength="3" maxlength="1000" required />
+                                        </div>
+
+                                        <div id="ticketDescription" class="form-group" style="display:none">
+                                            <lable id="ticketLableDescription" style="display:none">Discription</lable>
+                                            <textarea id="description" name="description" class="form-control" rows="4" asp-for="Description" minlength="5" maxlength="1000" required></textarea>
+                                            
+                                        </div>
+                                        <button asp-page-handler="SendBugTicket" id="btn_submit_Bug" type="submit" class="btn btn-success btn-lg" style="display:none">Send</button>
+                                        <br />
+                                        <br />
+                                        <br />
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row col-lg-12 ">
-                   
-                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid"
-                               aria-describedby="example1_info">
-                            <thead>
-                                <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-sort="ascending"
-                                        aria-label="Rendering engine: activate to sort column descending">
-                                        სათაური
-                                    </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Browser: activate to sort column ascending">აღწერა</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Platform(s): activate to sort column ascending">ტელეფონი</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Engine version: activate to sort column ascending">ელ. ფოსტა</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Engine version: activate to sort column ascending">შექმნის დრო</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Engine version: activate to sort column ascending">სტატუსი</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="CSS grade: activate to sort column ascending">მოქმედება</th>
+            </section>
+            <div class="row col-lg-12 ">
 
-                                </tr>
-                            </thead>
-                            
-                            <tbody>
-                                @foreach (var item in Model.Ticket)
-                                {
-                                <tr role="row" class="odd">
-                                    <td tabindex="0" class="sorting_1"> @Html.DisplayFor(modelItem => item.Title)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CreateDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                    <td>
-                                        <a class="btn btn-primary btn-sm"  asp-page="./Details" asp-route-id="@item.TicketId">
-                                            <i class="fas fa-folder">
-                                            </i>
-                                            View
-                                        </a>
-                                        <a class="btn btn-info btn-sm"  asp-page="./Edit" asp-route-id="@item.TicketId">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Edit
-                                        </a>
-                                        <a class="btn btn-danger btn-sm"  asp-page="./Delete" asp-route-id="@item.TicketId">
-                                            <i class="fas fa-trash">
-                                            </i>
-                                            Delete
-                                        </a>
-                                    </td>
+                <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid"
+                       aria-describedby="example1_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-sort="ascending"
+                                aria-label="Rendering engine: activate to sort column descending">
+                                სათაური
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-label="Browser: activate to sort column ascending">აღწერა</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-label="Platform(s): activate to sort column ascending">ტელეფონი</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-label="Engine version: activate to sort column ascending">ელ. ფოსტა</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-label="Engine version: activate to sort column ascending">შექმნის დრო</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-label="Engine version: activate to sort column ascending">დასრულების დრო</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-label="Engine version: activate to sort column ascending">სტატუსი</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-label="CSS grade: activate to sort column ascending">მოქმედება</th>
 
-                                    @*<td>
-                                        <a class="dropdown-item" asp-page="./Edit" asp-route-id="@item.TicketId">Edit</a>
-                                        <button type="button" class="btn btn-danger"><a asp-page="./Details" asp-route-id="@item.TicketId">Details</a></button>
-                                        <button type="button" class="btn btn-danger"><a asp-page="./Delete" asp-route-id="@item.TicketId">Delete</a></button>
-                                    </td>*@
-                                </tr>
-                                }
-                            </tbody>
-                            </table>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                            Showing 1 to 10 of
-                            57 entries
-                        </div>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.AllTickets)
+                        {
+                        <tr role="row" class="odd" style="@(item.TicketState==Enums.TicketState.Active ? "background-color:red;" : "background-color:green;")">
+                            <td tabindex="0" class="sorting_1">@item.Title</td>
+                            <td>@item.Description</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.Email</td>
+                            <td>@item.CreateDate</td>
+                            <td>@(item.DateFinished>DateTime.MinValue?item.DateFinished :null)</td>
+                            <td>@item.TicketState</td>
+                            <form method="post" asp-page-handler="ChangeTicketStatus">
+                                <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
+                                <td> <button id="btn_submit_Bug" type="submit" class="btn btn-success btn-lg" style="display:block">ChangetStatus</button></td>
+                            </form>
+
+
+                        </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+                        Showing 1 to 10 of
+                        57 entries
                     </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="example1_previous">
-                                    <a href="#"
-                                       aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                </li>
-                                <li class="paginate_button page-item active">
-                                    <a href="#" aria-controls="example1"
-                                       data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                                </li>
-                                <li class="paginate_button page-item ">
-                                    <a href="#" aria-controls="example1" data-dt-idx="2"
-                                       tabindex="0" class="page-link">2</a>
-                                </li>
-                                <li class="paginate_button page-item ">
-                                    <a href="#" aria-controls="example1" data-dt-idx="3"
-                                       tabindex="0" class="page-link">3</a>
-                                </li>
-                                <li class="paginate_button page-item ">
-                                    <a href="#" aria-controls="example1" data-dt-idx="4"
-                                       tabindex="0" class="page-link">4</a>
-                                </li>
-                                <li class="paginate_button page-item ">
-                                    <a href="#" aria-controls="example1" data-dt-idx="5"
-                                       tabindex="0" class="page-link">5</a>
-                                </li>
-                                <li class="paginate_button page-item ">
-                                    <a href="#" aria-controls="example1" data-dt-idx="6"
-                                       tabindex="0" class="page-link">6</a>
-                                </li>
-                                <li class="paginate_button page-item next" id="example1_next">
-                                    <a href="#"
-                                       aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                                </li>
-                            </ul>
-                        </div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button page-item previous disabled" id="example1_previous">
+                                <a href="#"
+                                   aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                            </li>
+                            <li class="paginate_button page-item active">
+                                <a href="#" aria-controls="example1"
+                                   data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example1" data-dt-idx="2"
+                                   tabindex="0" class="page-link">2</a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example1" data-dt-idx="3"
+                                   tabindex="0" class="page-link">3</a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example1" data-dt-idx="4"
+                                   tabindex="0" class="page-link">4</a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example1" data-dt-idx="5"
+                                   tabindex="0" class="page-link">5</a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example1" data-dt-idx="6"
+                                   tabindex="0" class="page-link">6</a>
+                            </li>
+                            <li class="paginate_button page-item next" id="example1_next">
+                                <a href="#"
+                                   aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /.card-body -->
     </div>
+    <!-- /.card-body -->
+</div>
+
+@section Scripts {
+       <script src="~/js/Support-min.js"></script>
+}

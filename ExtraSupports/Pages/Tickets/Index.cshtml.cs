@@ -1,33 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using ExtraSupports.Data;
 using ExtraSupports.Models;
+using ExtraSupports.Services;
+using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace ExtraSupports.Pages.Tickets
 {
     public class IndexModel : PageModel
     {
-        private readonly ExtraSupports.Data.ExtraSupportsContext _context;
+    
+        [BindProperty]
+        public string Title { get; set; }
+        [BindProperty]
+        public string PhoneNumber { get; set; }
 
-        public IndexModel(ExtraSupports.Data.ExtraSupportsContext context)
+        [BindProperty]
+        public string Email { get; set; }
+        [BindProperty]
+        public string Description { get; set; }
+        private readonly ITicketService TicketService;
+        public List<Ticket> AllTickets { get; set; } = new List<Ticket>();
+
+        public IndexModel(ITicketService ticketService)
         {
-            _context = context;
+            TicketService = ticketService;
+        }
+       public void OnGet()
+        {
+            AllTickets = TicketService.GetAllTickets().Result;
         }
 
-        public IList<Ticket> Ticket { get;set; }
-
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnPostSendBugTicket()
         {
-            Ticket = await _context.Ticket.ToListAsync();
+            
+            if (ModelState.IsValid)
+            {
+                //createBugTicket:
+                var ticket = new Ticket()
+                {
+                    TicketId = Guid.NewGuid(),
+                    Title = Title,
+                    Description = Description,
+                    PhoneNumber=PhoneNumber,
+                    Email=Email
+
+                };
+
+                await TicketService.HandleReceivedTicketAsync(ticket);
+
+                return RedirectToPage("/Tickets/Index");
+            }
+
+            return this.Page();
         }
-    }
-    public enum Status
-    {
-        ღია, დახურული
+
+
+        public async Task<IActionResult> OnPostChangeTicketStatus()
+        {
+
+            if (ModelState.IsValid)
+            {
+                //ChangeTicketStatus:
+                var ticketId = Request.Form["TicketId"];
+                Guid newGuid = Guid.Parse(ticketId);
+                TicketService.UpdateTicketStatus(newGuid);
+
+                return RedirectToPage("/Tickets/Index");
+            }
+
+            return this.Page();
+        }
     }
 }
