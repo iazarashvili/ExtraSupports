@@ -26,4 +26,8 @@ namespace ExtraSupports.Pages.Tickets
             Ticket = await _context.Ticket.ToListAsync();
         }
     }
+    public enum Status
+    {
+        ღია, დახურული
+    }
 }

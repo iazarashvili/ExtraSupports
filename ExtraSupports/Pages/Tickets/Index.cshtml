@@ -73,18 +73,23 @@
                                     <td>@Html.DisplayFor(modelItem => item.CreateDate)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                     <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-success btn-flat">Action</button>
-                                            <button type="button" class="btn btn-success btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                                <div class="dropdown-menu" role="menu" style="">
-                                                    <a class="dropdown-item" href="">დახურვა</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="" asp-page="./Delete" asp-route-id="@item.TicketId">წაშლა</a>
-                                                </div>
-                                            </button>
-                                        </div>
+                                        <a class="btn btn-primary btn-sm"  asp-page="./Details" asp-route-id="@item.TicketId">
+                                            <i class="fas fa-folder">
+                                            </i>
+                                            View
+                                        </a>
+                                        <a class="btn btn-info btn-sm"  asp-page="./Edit" asp-route-id="@item.TicketId">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-danger btn-sm"  asp-page="./Delete" asp-route-id="@item.TicketId">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Delete
+                                        </a>
                                     </td>
+
                                     @*<td>
                                         <a class="dropdown-item" asp-page="./Edit" asp-route-id="@item.TicketId">Edit</a>
                                         <button type="button" class="btn btn-danger"><a asp-page="./Details" asp-route-id="@item.TicketId">Details</a></button>
