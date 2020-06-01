@@ -58,6 +58,17 @@ namespace ExtraSupports.Pages.Tickets
             return this.Page();
         }
 
+        public async Task<IActionResult> OnPostDeleteTicket()
+        {
+            if (ModelState.IsValid)
+            {
+                var ticketId = Request.Form["TicketId"];
+                Guid newguid = Guid.Parse(ticketId);
+                TicketService.RemoveTisket(newguid);
+                return RedirectToPage("/Tickets/Index");
+            }
+            return this.Page();
+        }
 
         public async Task<IActionResult> OnPostChangeTicketStatus()
         {
@@ -71,7 +82,6 @@ namespace ExtraSupports.Pages.Tickets
 
                 return RedirectToPage("/Tickets/Index");
             }
-
             return this.Page();
         }
     }

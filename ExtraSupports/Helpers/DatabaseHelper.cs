@@ -33,10 +33,12 @@ namespace ExtraSupports.Helpers
 
         }
 
-        public void RemoveItem(Ticket ticket)
+        public void RemoveItem(Guid ticket)
         {
-            allTickets.Delete(ticket.TicketId);
+            allTickets.Delete(ticket);
         }
+
+       
 
         public void UpdateItem(Guid ticketId)
         {

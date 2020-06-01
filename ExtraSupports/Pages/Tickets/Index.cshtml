@@ -109,7 +109,9 @@
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                             aria-label="Engine version: activate to sort column ascending">სტატუსი</th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending">მოქმედება</th>
+                            aria-label="CSS grade: activate to sort column ascending">დახურვა</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending">წაშლა</th>
 
                     </tr>
                 </thead>
@@ -127,12 +129,17 @@
                         <td>@item.TicketState</td>
                         <form method="post" asp-page-handler="ChangeTicketStatus">
                             <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
-                            <td> <button id="btn_submit_Bug" type="submit" class="btn btn-success btn-sm" style="display:block">დახურვა</button></td>
+                            <td>
+                                <button id="btn_submit_Bug" type="submit" class="btn btn-success btn-sm" style="display:block">დახურვა</button>
+                            </td>
                         </form>
-                        <form method="post" asp-page-handler="">
+                        <form method="post" asp-page-handler="DeleteTicket">
                             <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
-                            <td> <button id="btn_submit_Bug" type="submit" class="btn btn-success btn-sm" style="display:block">წაშლა</button></td>
+                            <td>
+                                <button id="btn_submit_Bug" type="submit" class="btn btn-danger btn-sm" style="display:block">წაშლა</button>
+                            </td>
                         </form>
+
                     </tr>
                     }
                 </tbody>

@@ -12,6 +12,6 @@ namespace ExtraSupports.Helpers
         void AddToDatabase(Ticket ticket);
         void UpdateItem(Guid ticketID);
         ICollection<Ticket> GetAllTickets();
-        void RemoveItem(Ticket ticket);
+        void RemoveItem(Guid ticket);
     }
 }

@@ -26,6 +26,11 @@ namespace ExtraSupports.Services
             return new Ticket(receivedTicket);
         }
 
+        public void RemoveTisket(Guid ticket)
+        {
+             DatabaseHelper.RemoveItem(ticket);
+        }
+
         public void UpdateTicketStatus(Guid ticketId)
         {
             DatabaseHelper.UpdateItem(ticketId);
