@@ -1,6 +1,7 @@
 ﻿using ExtraSupports.Enums;
 using ExtraSupports.Models;
 using LiteDB;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,8 @@ namespace ExtraSupports.Helpers
 
         public ICollection<Ticket> GetAllTickets()
         {
-            return allTickets.FindAll().ToList();
+           
+            return allTickets.FindAll().OrderByDescending(order => order.CreateDate).ToList();
 
         }
 

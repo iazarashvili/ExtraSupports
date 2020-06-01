@@ -9,6 +9,5 @@ namespace ExtraSupports.Enums
     {
         Active,
         Finished
-
     }
 }

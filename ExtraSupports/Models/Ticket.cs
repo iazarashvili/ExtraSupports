@@ -1,5 +1,6 @@
 ﻿using ExtraSupports.Enums;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ExtraSupports.Models
 {
-    public class Ticket
+    public class Ticket 
     {
         public Guid TicketId { get; set; }
         public string Title { get; set; }
@@ -38,5 +39,9 @@ namespace ExtraSupports.Models
             CloseComment = ticket.CloseComment;
         }
 
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
     }
 }
