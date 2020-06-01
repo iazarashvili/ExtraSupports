@@ -4,6 +4,8 @@
 @{
     ViewData["Title"] = "Index";
 }
+
+
 <div class="card ">
     <div class="card-header">
         <h3 class="card-title">DataTable with default features</h3>
@@ -22,7 +24,7 @@
                                 <option value="25">25</option>
                                 <option value="50">50</option>
                                 <option value="100">100</option>
-                            </select> entries
+                            </select>
                         </label>
                     </div>
                 </div>
@@ -40,7 +42,7 @@
                 <div class="row" style="opacity:0.5" )">
                     <div class="col-lg-6 contactcard">
                         <img src="https://image.flaticon.com/icons/svg/1612/1612229.svg" height="40" width="40" alt="Feature-Support-Icon fehlt" title="FeatureSenden" style="margin-bottom:1rem;" class="img-fluid" />
-                        <button class="btn btn-primary" style="background-color:#28A745;" id="bug-button" onclick="displayItems()" Create Bug>Create Bug</button>
+                        <button class="btn btn-primary" style="background-color:#28A745;" id="bug-button" onclick="displayItems()">Create Bug</button>
 
                     </div>
                 </div>
@@ -49,7 +51,7 @@
 
         <!--Creating ticket-->
         <section style="display:none; margin-top:4rem;" id="formsection">
-            <div class="container">
+            <div class="container id="myDIV">
                 <div>
                     <div>
                         <div class="card">
@@ -118,33 +120,31 @@
                 <tbody>
                     @foreach (var item in Model.AllTickets)
                     {
-                        
-                    <tr role="row" class="odd" style="@(item.TicketState==Enums.TicketState.Active ? "background-color:#A6A6A6;" : "background-color:#C7F3F3;")">
-                        <td tabindex="0" class="sorting_1">@item.Title</td>
-                        <td>@item.Description</td>
-                        <td>@item.PhoneNumber</td>
-                        <td>@item.Email</td>
-                        <td>@item.CreateDate</td>
-                        <td>@item.CloseComment</td>
-                        <td>@item.TicketState</td>
-                        <form method="post" asp-page-handler="ChangeTicketStatus">
-                            <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
-                            <td>
-                                <button id="btn_submit_Bug" type="submit" class="btn btn-success btn-sm" style="display:block">დახურვა</button>
-                            </td>
-                        </form>
-                        <form method="post" asp-page-handler="DeleteTicket">
-                            <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
-                            <td>
-                                <button id="btn_submit_Bug" type="submit" class="btn btn-danger btn-sm" style="display:block">წაშლა</button>
-                            </td>
-                        </form>
 
-                    </tr>
+                        <tr role="row" class="odd" style="@(item.TicketState==Enums.TicketState.Active ? "background-color:#C4C4C4;" : "background-color:#F9F9F9;")">
+                            <td tabindex="0" class="sorting_1">@item.Title</td>
+                            <td>@item.Description</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.Email</td>
+                            <td>@item.CreateDate</td>
+                            <td>@item.CloseComment</td>
+                            <td>@item.TicketState</td>
+                            <form method="post" asp-page-handler="ChangeTicketStatus">
+                                    <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
+                                    <td>
+                                        <button id="btn_submit_Bug" type="submit" class="btn btn-success btn-sm" style="display:block">დახურვა</button>
+                                    </td>
+                                </form>
+                            <form method="post" asp-page-handler="DeleteTicket">
+                                    <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
+                                    <td>
+                                        <button id="btn_submit_Bug" type="submit" class="btn btn-danger btn-sm" style="display:block">წაშლა</button>
+                                    </td>
+                                </form>
+                            <td>
+                        </tr>
                     }
                 </tbody>
-
-
             </table>
         </div>
         <div class="row">
@@ -200,4 +200,15 @@
 
 @section Scripts {
     <script src="~/js/Support-min.js"></script>
+
 }
+<script>
+    function myFunction() {
+        var x = document.getElementById("formsection")
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
