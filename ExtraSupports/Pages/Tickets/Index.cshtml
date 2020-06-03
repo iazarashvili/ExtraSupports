@@ -129,6 +129,7 @@
                             <td>@item.CreateDate</td>
                             <td>@item.CloseComment</td>
                             <td>@item.TicketState</td>
+                            
                             @*<form method="post" asp-page-handler="ChangeTicketStatus">
                                         <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
                                         <td>
@@ -151,9 +152,46 @@
                                             <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
                                             <button class="dropdown-item" id="btn_submit_Bug" type="submit">დახურვა</button>
                                         </form>
-                                        <form method="post" asp-page-handler="ChangeTicketStatus">
-                                            <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
-                                            <button class="dropdown-item" id="btn_submit_Bug" type="submit">დეტალურად</button>
+                                        <button class="dropdown-item" id="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="OpenUpdateLicenseModal(this)" data-placement="top">დეტალურად</button>
+                                        <form  method="get">
+                                            <div class="modal fade" id="myModal" tabindex="-1">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Description</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+
+
+                                                        <h5>შექმნის დრო</h5>
+                                                        <p>@item.CreateDate</p>
+                                                        <hr />
+                                                        <h5>ტელეფონი</h5>
+                                                        <p>@item.PhoneNumber</p>
+                                                        <hr />
+                                                        <h5>ელ. ფოსტა</h5>
+                                                        <p>@item.Email</p>
+                                                        <hr />
+                                                        <h5>სათაური</h5>
+                                                        <p>@item.Title</p>
+                                                        <hr />
+                                                        <h5>დახურვის კომენტარი</h5>
+                                                        <p>@item.CloseComment</p>
+                                                        <hr />
+                                                        <h5>აღწერა</h5>
+                                                        <p>@item.Description</p>
+                                                        <hr />
+                                                        <h5>სტატუსი</h5>
+                                                        <p>@item.TicketState</p>
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">დახურვა</button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </form>
                                         <div class="dropdown-divider"></div>
                                         <form method="post" asp-page-handler="DeleteTicket">
@@ -164,7 +202,7 @@
                                 </div>
                             </td>
                         </tr>
-                    }
+                      }
                 </tbody>
             </table>
         </div>
@@ -222,7 +260,7 @@
 @section Scripts {
     <script src="~/js/Support-min.js"></script>
 
-}
+
 <script>
     function myFunction() {
         var x = document.getElementById("formsection")
@@ -233,3 +271,4 @@
         }
     }
 </script>
+}
