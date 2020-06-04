@@ -24,6 +24,7 @@ namespace ExtraSupports.Pages.Tickets
         public string Description { get; set; }
         private readonly ITicketService TicketService;
         public List<Ticket> AllTickets { get; set; } = new List<Ticket>();
+        public int TicketCount { get; set; }
 
         public IndexModel(ITicketService ticketService)
         {
@@ -31,6 +32,7 @@ namespace ExtraSupports.Pages.Tickets
         }
        public void OnGet()
         {
+            TicketCount = TicketService.getActiveTicketsCount();
             AllTickets = TicketService.GetAllTickets().Result;
         }
 

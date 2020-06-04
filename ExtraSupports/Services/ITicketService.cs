@@ -12,5 +12,6 @@ namespace ExtraSupports.Services
         Task<List<Ticket>> GetAllTickets();
         void UpdateTicketStatus(Guid ticketId);
         void RemoveTisket(Guid ticket);
+        int getActiveTicketsCount();
     }
 }

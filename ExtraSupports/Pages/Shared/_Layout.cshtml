@@ -173,7 +173,7 @@
                                 <p>
                                     ბილეთები
                                     <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right">6</span>
+                                    <span class="badge badge-info right" id="ticketcount"></span>
                                 </p>
                             </a>
                     </ul>
@@ -289,6 +289,12 @@
         $.widget.bridge('uibutton', $.ui.button)
 
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#ticketcount').html(@Model.TicketCount);
+        console.log("asdasd");
+    });
+    </script>
     <!-- Bootstrap 4 -->
     <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->
@@ -315,7 +321,7 @@
     <script src="~/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/dist/js/demo.js"></script>
-    
+
     @RenderSection("Scripts", required: false)
 </body>
 

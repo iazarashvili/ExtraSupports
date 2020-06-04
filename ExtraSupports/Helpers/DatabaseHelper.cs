@@ -24,7 +24,10 @@ namespace ExtraSupports.Helpers
             allTickets.Insert(ticket);
         }
 
-
+        public int getActiveTicketCount()
+        {
+            return allTickets.FindAll().Where(x => x.TicketState == TicketState.Active).Count();
+        }
 
         public ICollection<Ticket> GetAllTickets()
         {
