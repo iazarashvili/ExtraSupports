@@ -74,6 +74,7 @@
                                     <div id="ticketDescription" class="form-group" style="display:none">
                                         <lable id="ticketLableDescription" style="display:none">Discription</lable>
                                         <textarea id="description" name="description" class="form-control" rows="4" asp-for="Description" minlength="5" maxlength="1000" required></textarea>
+
                                     </div>
                                     <button asp-page-handler="SendBugTicket" id="btn_submit_Bug" type="submit" class="btn btn-success btn-lg" style="display:none">Send</button>
                                     <br />
@@ -122,7 +123,7 @@
                         <td>@item.Email</td>
                         <td>@item.CreateDate</td>
                         <td>@item.TicketState</td>
-                        @*<td>
+                        <td>
                             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal"  data-placement="top">დეტალურად</button>
                             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -131,6 +132,8 @@
                                             <h2 class="modal-title" id="detailsModalCenterLongTitle"><b style="text-align:center;">Ticket details</b></h2>
                                         </div>
                                         <div class="modal-body">
+
+
                                             <h5>შექმნის დრო</h5>
                                             <p>@item.CreateDate</p>
                                             <hr />
@@ -151,6 +154,8 @@
                                             <hr />
                                             <h5>სტატუსი</h5>
                                             <p>@item.TicketState</p>
+
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">დახურვა</button>
@@ -158,7 +163,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </td>*@
+                        </td>
                         <td>
 
                             <div class="input-group-prepend">
@@ -170,50 +175,15 @@
                                         <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
                                         <button class="dropdown-item" id="btn_submit_Bug" type="submit">დახურვა</button>
                                     </form>
-                                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#myModal" data-placement="top">დეტალურად</button>
-                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h2 class="modal-title" id="detailsModalCenterLongTitle"><b style="text-align:center;">Ticket details</b></h2>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h5>შექმნის დრო</h5>
-                                                    <p>@item.CreateDate</p>
-                                                    <hr />
-                                                    <h5>ტელეფონი</h5>
-                                                    <p>@item.PhoneNumber</p>
-                                                    <hr />
-                                                    <h5>ელ. ფოსტა</h5>
-                                                    <p>@item.Email</p>
-                                                    <hr />
-                                                    <h5>სათაური</h5>
-                                                    <p>@item.Title</p>
-                                                    <hr />
-                                                    <h5>დახურვის კომენტარი</h5>
-                                                    <p>@item.CloseComment</p>
-                                                    <hr />
-                                                    <h5>აღწერა</h5>
-                                                    <p>@item.Description</p>
-                                                    <hr />
-                                                    <h5>სტატუსი</h5>
-                                                    <p>@item.TicketState</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">დახურვა</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
+
                                     <div class="dropdown-divider"></div>
                                     <form method="post" asp-page-handler="DeleteTicket">
                                         <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
                                         <button class="dropdown-item" id="btn_submit_Bug" type="submit">წაშლა</button>
                                     </form>
-
                                 </div>
                             </div>
-
                         </td>
 
                     </tr>
