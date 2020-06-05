@@ -123,51 +123,23 @@
                         <td>@item.Email</td>
                         <td>@item.CreateDate</td>
                         <td>@item.TicketState</td>
+                        
                         <td>
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal"  data-placement="top">დეტალურად</button>
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h2 class="modal-title" id="detailsModalCenterLongTitle"><b style="text-align:center;">Ticket details</b></h2>
-                                        </div>
-                                        <div class="modal-body">
+                            <input type="hidden" id="@("ticketid"+item.TicketId)" value="@item.TicketId" />
+                            <input type="hidden" id="@("phonenumber"+item.TicketId)" value="@item.PhoneNumber" />
+                            <input type="hidden" id="@("email"+item.TicketId)" value="@item.Email" />
+                            <input type="hidden" id="@("ticketstate"+item.TicketId)" value="@item.TicketState" />
+                            <input type="hidden" id="@("title"+item.TicketId)" value="@item.Title" />
+                            <input type="hidden" id="@("createdate"+item.TicketId)" value="@item.CreateDate" />
+                            <input type="hidden" id="@("discription"+item.TicketId)" value="@item.Description" />
+                            <input type="hidden" id="@("closecomment"+item.CloseComment)" value="@item.CloseComment" />
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" onclick="modalFunction(this)" value="@item" data-target="#myModal" data-placement="top">დეტალურად</button>
 
-
-                                            <h5>შექმნის დრო</h5>
-                                            <p>@item.CreateDate</p>
-                                            <hr />
-                                            <h5>ტელეფონი</h5>
-                                            <p>@item.PhoneNumber</p>
-                                            <hr />
-                                            <h5>ელ. ფოსტა</h5>
-                                            <p>@item.Email</p>
-                                            <hr />
-                                            <h5>სათაური</h5>
-                                            <p>@item.Title</p>
-                                            <hr />
-                                            <h5>დახურვის კომენტარი</h5>
-                                            <p>@item.CloseComment</p>
-                                            <hr />
-                                            <h5>აღწერა</h5>
-                                            <p>@item.Description</p>
-                                            <hr />
-                                            <h5>სტატუსი</h5>
-                                            <p>@item.TicketState</p>
-
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">დახურვა</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </td>
                         <td>
 
                             <div class="input-group-prepend">
-                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <button type="button" id="@item.TicketId" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                     Action
                                 </button>
                                 <div class="dropdown-menu">
@@ -190,6 +162,44 @@
                     }
                 </tbody>
             </table>
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="detailsModalCenterLongTitle"><b style="text-align:center;">Ticket details</b></h2>
+                    </div>
+                    <div class="modal-body">
+
+                        <h5>სათაური</h5>
+                        <p id="title"></p>
+                        <hr />
+                        <h5>სტატუსი</h5>
+                        <p id="ticketstate"></p>
+                        <h5>შექმნის დრო</h5>
+                        <p id="createDate"></p>
+                        <hr />
+                        <h5>ტელეფონი</h5>
+                        <p id="phoneNumber"></p>
+                        <hr />
+                        <h5>ელ. ფოსტა</h5>
+                        <p id="email"></p>
+                        <hr />
+                        <h5>აღწერა</h5>
+                        <p id="description"></p>
+                        <hr />
+                        <div id="closeComment">
+                            <h5>დახურვის კომენტარი</h5>
+                            <p id="closecommentText"></p>
+                            <hr />
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">დახურვა</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-5">
@@ -260,5 +270,23 @@
         $(document).ready(function () {
             $('.dropdown-toggle').dropdown()
         });</script>
+    <script>
+        function modalFunction() {
+            var id = $(myButton).attr("id");
+            $("#title").text($("title" + id).val());
+            $("#ticketstate").text($("ticketstate" + id).val());
+            $("#createDate").text($("createdate" + id).val());
+            $("#phoneNumber").text($("phonenumber" + id).val());
+            $("#email").text($("email" + id).val());
+            $("#description").text($("description" + id).val());
+            if ($("ticketstate" + id).val() == "Finished") {
+                $("#closecommentText").text($("closeComment" + id).val());
+            } else
+            {
+                $("#closeComment").css("display", "none");
+            }
+            
+        }
+    </script>
 }
 }
