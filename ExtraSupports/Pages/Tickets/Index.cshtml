@@ -131,15 +131,15 @@
                             <input type="hidden" id="@("ticketstate"+item.TicketId)" value="@item.TicketState" />
                             <input type="hidden" id="@("title"+item.TicketId)" value="@item.Title" />
                             <input type="hidden" id="@("createdate"+item.TicketId)" value="@item.CreateDate" />
-                            <input type="hidden" id="@("discription"+item.TicketId)" value="@item.Description" />
+                            <input type="hidden" id="@("description"+item.TicketId)" value="@item.Description" />
                             <input type="hidden" id="@("closecomment"+item.CloseComment)" value="@item.CloseComment" />
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" onclick="modalFunction(this)" value="@item" data-target="#myModal" data-placement="top">დეტალურად</button>
+                            <button type="button" id="@item.TicketId" class="btn btn-secondary" data-toggle="modal" onclick="modalFunction(this)"  data-target="#myModal" data-placement="top">დეტალურად</button>
 
                         </td>
                         <td>
 
                             <div class="input-group-prepend">
-                                <button type="button" id="@item.TicketId" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <button type="button"  class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                     Action
                                 </button>
                                 <div class="dropdown-menu">
@@ -172,7 +172,7 @@
                     <div class="modal-body">
 
                         <h5>სათაური</h5>
-                        <p id="title"></p>
+                        <p id="titleModal"></p>
                         <hr />
                         <h5>სტატუსი</h5>
                         <p id="ticketstate"></p>
@@ -186,7 +186,7 @@
                         <p id="email"></p>
                         <hr />
                         <h5>აღწერა</h5>
-                        <p id="description"></p>
+                        <p id="descriptionText"></p>
                         <hr />
                         <div id="closeComment">
                             <h5>დახურვის კომენტარი</h5>
@@ -271,18 +271,21 @@
             $('.dropdown-toggle').dropdown()
         });</script>
     <script>
-        function modalFunction() {
+        function modalFunction(myButton) {
             var id = $(myButton).attr("id");
-            $("#title").text($("title" + id).val());
-            $("#ticketstate").text($("ticketstate" + id).val());
-            $("#createDate").text($("createdate" + id).val());
-            $("#phoneNumber").text($("phonenumber" + id).val());
-            $("#email").text($("email" + id).val());
-            $("#description").text($("description" + id).val());
-            if ($("ticketstate" + id).val() == "Finished") {
-                $("#closecommentText").text($("closeComment" + id).val());
+            $("#titleModal").text($("#title" + id).val());
+            $("#ticketstate").text($("#ticketstate" + id).val());
+            $("#createDate").text($("#createdate" + id).val());
+            $("#phoneNumber").text($("#phonenumber" + id).val());
+            $("#email").text($("#email" + id).val());
+            $("#descriptionText").text($("#description" + id).val());
+                     
+            if ($("#ticketstate" + id).val() === "Finished") {
+                $("#closecommentText").text($("#closeComment" + id).val());
+                $("#closeComment").css("display", "block");
             } else
             {
+               
                 $("#closeComment").css("display", "none");
             }
             
