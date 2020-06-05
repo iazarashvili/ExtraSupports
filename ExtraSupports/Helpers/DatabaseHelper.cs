@@ -43,13 +43,15 @@ namespace ExtraSupports.Helpers
 
        
 
-        public void UpdateItem(Guid ticketId)
+      
+
+        public void CloseTicket(Guid ticketId,string closeComment)
         {
             var ticket = allTickets.Find(x => x.TicketId == ticketId).FirstOrDefault();
-            if(ticket != null)
+            if (ticket != null)
             {
+                ticket.CloseComment = closeComment;
                 ticket.TicketState = TicketState.Finished;
-               
                 allTickets.Update(ticket);
             }
         }

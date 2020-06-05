@@ -10,7 +10,7 @@ namespace ExtraSupports.Helpers
     public interface IDatabaseHelper
     {
         void AddToDatabase(Ticket ticket);
-        void UpdateItem(Guid ticketID);
+        void CloseTicket(Guid ticketID,string closeComment);
         ICollection<Ticket> GetAllTickets();
         void RemoveItem(Guid ticket);
         int getActiveTicketCount();

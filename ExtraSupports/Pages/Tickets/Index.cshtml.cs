@@ -72,19 +72,17 @@ namespace ExtraSupports.Pages.Tickets
             return this.Page();
         }
 
-        public async Task<IActionResult> OnPostChangeTicketStatus()
+        public async Task<IActionResult> OnPostCloseTicket()
         {
-
             if (ModelState.IsValid)
             {
-                //ChangeTicketStatus:
                 var ticketId = Request.Form["TicketId"];
-                Guid newGuid = Guid.Parse(ticketId);
-                TicketService.UpdateTicketStatus(newGuid);
-
+                Guid newguid = Guid.Parse(ticketId);
+                TicketService.CloseTicket(newguid, CloseComment);
                 return RedirectToPage("/Tickets/Index");
             }
             return this.Page();
         }
+
     }
 }

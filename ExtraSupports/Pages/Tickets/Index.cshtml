@@ -143,22 +143,49 @@
                                     Action
                                 </button>
                                 <div class="dropdown-menu">
-                                    <form method="post" asp-page-handler="ChangeTicketStatus">
-                                        <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
-                                        <button class="dropdown-item" id="btn_submit_Bug" type="submit">დახურვა</button>
-                                    </form>
-
-
+                                   
+                                <button class="dropdown-item" id="btn_submit_Bug" data-toggle="modal" data-target="#exampleModal" type="button">დახურვა</button>
+                              
                                     <div class="dropdown-divider"></div>
                                     <form method="post" asp-page-handler="DeleteTicket">
                                         <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
                                         <button class="dropdown-item" id="btn_submit_Bug" type="submit">წაშლა</button>
-                                    </form>
+                                        </form>
                                 </div>
                             </div>
                         </td>
+                        <td>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">დახურვის კომენტარი</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form  method="post" asp-page-handler="CloseTicket">
+                                                <div class="form-group">
+                                                    <label for="message-text" class="col-form-label">შეიყვანეთ დახურვის კომენტარი</label>
+                                                    <textarea id="closeComments" name="closecomment" class="form-control" rows="4" asp-for="CloseComment" minlength="5" maxlength="1000" required></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
+                                                    <button type="submit" class="btn btn-primary">ბილეთის დახურვა</button>
+                                                </div>
+                                            </form>
+                                            </div>
 
-                    </tr>
+                                        </div>
+
+                                    </div>
+
+
+
+                            </div>
+                        </td>
+                     </tr>
                     }
                 </tbody>
             </table>

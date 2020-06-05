@@ -15,6 +15,11 @@ namespace ExtraSupports.Services
             DatabaseHelper = databaseHelper;
         }
 
+        public void CloseTicket(Guid ticketId, string closeComment)
+        {
+            DatabaseHelper.CloseTicket(ticketId, closeComment);
+        }
+
         public int getActiveTicketsCount()
         {
            return  DatabaseHelper.getActiveTicketCount();
@@ -37,9 +42,6 @@ namespace ExtraSupports.Services
              DatabaseHelper.RemoveItem(ticket);
         }
 
-        public void UpdateTicketStatus(Guid ticketId)
-        {
-            DatabaseHelper.UpdateItem(ticketId);
-        }
+        
     }
 }

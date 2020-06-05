@@ -10,7 +10,7 @@ namespace ExtraSupports.Services
     {
         Task<Ticket> HandleReceivedTicketAsync(Ticket receivedTicket);
         Task<List<Ticket>> GetAllTickets();
-        void UpdateTicketStatus(Guid ticketId);
+        void CloseTicket(Guid ticketId,string closeComment);
         void RemoveTisket(Guid ticket);
         int getActiveTicketsCount();
     }
