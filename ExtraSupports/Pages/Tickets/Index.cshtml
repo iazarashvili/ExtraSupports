@@ -76,7 +76,8 @@
                                         <textarea id="description" name="description" class="form-control" rows="4" asp-for="Description" minlength="5" maxlength="1000" required></textarea>
 
                                     </div>
-                                    <button asp-page-handler="SendBugTicket" id="btn_submit_Bug" type="submit" class="btn btn-success btn-lg" style="display:none">Send</button>
+                                    <button asp-page-handler="SendBugTicket" id="btn_submit_Bug" type="submit" class="btn btn-success btn-lg" style="display:none"
+                                            >Send</button>
                                     <br />
                                     <br />
                                     <br />
@@ -318,5 +319,11 @@
             
         }
     </script>
+<script>
+    const button = document.getElementById(btn_submit_Bug);
+    button.addEventListener("click", function () {
+        // Submit form
+    }, { once: true });
+</script>
 }
 }
