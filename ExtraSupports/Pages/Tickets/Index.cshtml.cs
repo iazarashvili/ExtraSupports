@@ -76,7 +76,7 @@ namespace ExtraSupports.Pages.Tickets
         {
             if (ModelState.IsValid)
             {
-                var ticketId = Request.Form["TicketId"];
+                var ticketId = Request.Form["closeTicketId"];
                 Guid newguid = Guid.Parse(ticketId);
                 TicketService.CloseTicket(newguid, CloseComment);
                 return RedirectToPage("/Tickets/Index");

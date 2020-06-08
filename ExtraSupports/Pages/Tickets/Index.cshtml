@@ -117,64 +117,64 @@
                     @foreach (var item in Model.AllTickets)
                     {
 
-                    <tr role="row" class="odd" style="@(item.TicketState==Enums.TicketState.Active ? "background-color:#C4C4C4;" : "background-color:#F9F9F9;")">
-                        <td tabindex="0" class="sorting_1">@item.Title</td>
-                        <td>@item.PhoneNumber</td>
-                        <td>@item.Email</td>
-                        <td>@item.CreateDate</td>
-                        <td>@item.TicketState</td>
-                        
-                        <td>
-                            <input type="hidden" id="@("ticketid"+item.TicketId)" value="@item.TicketId" />
-                            <input type="hidden" id="@("phonenumber"+item.TicketId)" value="@item.PhoneNumber" />
-                            <input type="hidden" id="@("email"+item.TicketId)" value="@item.Email" />
-                            <input type="hidden" id="@("ticketstate"+item.TicketId)" value="@item.TicketState" />
-                            <input type="hidden" id="@("title"+item.TicketId)" value="@item.Title" />
-                            <input type="hidden" id="@("createdate"+item.TicketId)" value="@item.CreateDate" />
-                            <input type="hidden" id="@("description"+item.TicketId)" value="@item.Description" />
-                            <input type="hidden" id="@("closecomment"+item.CloseComment)" value="@item.CloseComment" />
-                            <button type="button" id="@item.TicketId" class="btn btn-secondary" data-toggle="modal" onclick="modalFunction(this)"  data-target="#myModal" data-placement="top">დეტალურად</button>
+                        <tr role="row" class="odd" style="@(item.TicketState==Enums.TicketState.Active ? "background-color:#C4C4C4;" : "background-color:#F9F9F9;")">
+                            <td tabindex="0" class="sorting_1">@item.Title</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.Email</td>
+                            <td>@item.CreateDate</td>
+                            <td>@item.TicketState</td>
 
-                        </td>
-                        <td>
+                            <td>
+                                <input type="hidden" id="@("ticketid"+item.TicketId)" value="@item.TicketId" />
+                                <input type="hidden" id="@("phonenumber"+item.TicketId)" value="@item.PhoneNumber" />
+                                <input type="hidden" id="@("email"+item.TicketId)" value="@item.Email" />
+                                <input type="hidden" id="@("ticketstate"+item.TicketId)" value="@item.TicketState" />
+                                <input type="hidden" id="@("title"+item.TicketId)" value="@item.Title" />
+                                <input type="hidden" id="@("createdate"+item.TicketId)" value="@item.CreateDate" />
+                                <input type="hidden" id="@("description"+item.TicketId)" value="@item.Description" />
+                                <input type="hidden" id="@("closecomment"+item.CloseComment)" value="@item.CloseComment" />
+                                <button type="button" id="@item.TicketId" class="btn btn-secondary" data-toggle="modal" onclick="modalFunction(this)" data-target="#myModal" data-placement="top">დეტალურად</button>
 
-                            <div class="input-group-prepend">
-                                <button type="button"  class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    Action
-                                </button>
-                                <div class="dropdown-menu">
-                                   
-                                <button class="dropdown-item" id="btn_submit_Bug" data-toggle="modal" data-target="#exampleModal" type="button">დახურვა</button>
-                              
-                                    <div class="dropdown-divider"></div>
-                                    <form method="post" asp-page-handler="DeleteTicket">
-                                        <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
-                                        <button class="dropdown-item" id="btn_submit_Bug" type="submit">წაშლა</button>
+                            </td>
+                            <td>
+
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        Action
+                                    </button>
+                                    <div class="dropdown-menu">
+
+                                        <button class="dropdown-item"  id="@item.TicketId" data-toggle="modal" onclick="receiveTicketId(this)" data-target="#exampleModal" type="button">დახურვა</button>
+
+                                        <div class="dropdown-divider"></div>
+                                        <form method="post" asp-page-handler="DeleteTicket">
+                                            <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
+                                            <button class="dropdown-item"  type="submit">წაშლა</button>
                                         </form>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">დახურვის კომენტარი</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form  method="post" asp-page-handler="CloseTicket">
-                                                <div class="form-group">
-                                                    <label for="message-text" class="col-form-label">შეიყვანეთ დახურვის კომენტარი</label>
-                                                    <textarea id="closeComments" name="closecomment" class="form-control" rows="4" asp-for="CloseComment" minlength="5" maxlength="1000" required></textarea>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
-                                                    <button type="submit" class="btn btn-primary">ბილეთის დახურვა</button>
-                                                </div>
-                                            </form>
+                            </td>
+                            <td>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">დახურვის კომენტარი</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post" asp-page-handler="CloseTicket">
+                                                    <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">შეიყვანეთ დახურვის კომენტარი</label>
+                                                        <textarea id="closeComments" name="closecomment" class="form-control" rows="4" asp-for="CloseComment" minlength="5" maxlength="1000" required></textarea>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="hidden" name="closeTicketId" id="closeTicketId"  />
+                                                        <button type="submit" class="btn btn-primary">ბილეთის დახურვა</button>
+                                                    </div>
+                                                </form>
                                             </div>
 
                                         </div>
@@ -183,9 +183,9 @@
 
 
 
-                            </div>
-                        </td>
-                     </tr>
+                                </div>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -306,17 +306,32 @@
             $("#phoneNumber").text($("#phonenumber" + id).val());
             $("#email").text($("#email" + id).val());
             $("#descriptionText").text($("#description" + id).val());
-                     
+
             if ($("#ticketstate" + id).val() === "Finished") {
                 $("#closecommentText").text($("#closeComment" + id).val());
                 $("#closeComment").css("display", "block");
-            } else
-            {
-               
+            } else {
+
                 $("#closeComment").css("display", "none");
             }
-            
+
         }
     </script>
+
+    <script>
+        function receiveTicketId(myButton) {
+            var id = $(myButton).attr("id");
+            console.log(id);
+
+            $('input[name="closeTicketId"]').val(id);
+        }
+    </script>
+    <script>
+        const button = document.getElementById(btn_submit_Bug);
+        button.addEventListener("click", function () {
+            // Submit form
+        }, { once: true });
+    </script>
+
 }
 }
