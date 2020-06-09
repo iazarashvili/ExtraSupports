@@ -30,6 +30,24 @@ namespace ExtraSupports.Services
             return DatabaseHelper.GetAllTickets().ToList();
         }
 
+        private  async Task<List<Ticket>> GetData()
+        {
+            return  DatabaseHelper.GetAllTickets().ToList();
+        }
+
+        public async Task<int> GetCount()
+        {
+            var data = await GetData();
+            return data.Count;
+
+        }
+
+        public async Task<List<Ticket>> GetPaginatedResult(int currentPage, int pageSize = 10)
+        {
+            var data = await GetData();
+            return data.OrderBy(d => d.TicketId).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+        }
+
         public async Task<Ticket> HandleReceivedTicketAsync(Ticket receivedTicket)
         {
             receivedTicket.CreateDate = DateTime.Now;

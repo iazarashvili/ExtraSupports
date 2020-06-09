@@ -11,6 +11,13 @@ namespace ExtraSupports.Pages.Tickets
     public class IndexModel : PageModel
     {
 
+        [BindProperty(SupportsGet = true)]
+        public int CurrentPage { get; set; } = 1;
+        public int Count { get; set; }
+        public int PageSize { get; set; } = 10;
+
+        public int TotalPages => (int)Math.Ceiling(decimal.Divide(Count, PageSize));
+
         [BindProperty]
         public string CloseComment { get; set; }
         [BindProperty]
@@ -23,18 +30,24 @@ namespace ExtraSupports.Pages.Tickets
         [BindProperty]
         public string Description { get; set; }
         private readonly ITicketService TicketService;
-        public List<Ticket> AllTickets { get; set; } = new List<Ticket>();
+        public List<Ticket> AllTickets { get; set; } 
         public int TicketCount { get; set; }
 
         public IndexModel(ITicketService ticketService)
         {
             TicketService = ticketService;
         }
-       public void OnGet()
+
+        public async Task OnGetAsync()
         {
-            TicketCount = TicketService.getActiveTicketsCount();
-            AllTickets = TicketService.GetAllTickets().Result;
+            AllTickets = await TicketService.GetPaginatedResult(CurrentPage, PageSize);
+            Count = await TicketService.GetCount();
         }
+       //public void OnGet()
+       // {
+       //     TicketCount = TicketService.getActiveTicketsCount();
+       //     AllTickets = TicketService.GetAllTickets().Result;
+       // }
 
         public async Task<IActionResult> OnPostSendBugTicket()
         {

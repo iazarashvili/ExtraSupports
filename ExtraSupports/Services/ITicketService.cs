@@ -10,8 +10,11 @@ namespace ExtraSupports.Services
     {
         Task<Ticket> HandleReceivedTicketAsync(Ticket receivedTicket);
         Task<List<Ticket>> GetAllTickets();
+        Task<List<Ticket>> GetPaginatedResult(int currentPage, int pageSize = 10);
         void CloseTicket(Guid ticketId,string closeComment);
         void RemoveTisket(Guid ticket);
         int getActiveTicketsCount();
+
+        Task<int> GetCount();
     }
 }
