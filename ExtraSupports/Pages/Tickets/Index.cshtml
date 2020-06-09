@@ -132,7 +132,7 @@
                                 <input type="hidden" id="@("title"+item.TicketId)" value="@item.Title" />
                                 <input type="hidden" id="@("createdate"+item.TicketId)" value="@item.CreateDate" />
                                 <input type="hidden" id="@("description"+item.TicketId)" value="@item.Description" />
-                                <input type="hidden" id="@("closecomment"+item.CloseComment)" value="@item.CloseComment" />
+                                <input type="hidden" id="@("closingComment"+item.TicketId)" value="@item.CloseComment" />
                                 <button type="button" id="@item.TicketId" class="btn btn-secondary" data-toggle="modal" onclick="modalFunction(this)" data-target="#myModal" data-placement="top">დეტალურად</button>
 
                             </td>
@@ -272,8 +272,10 @@
             $("#descriptionText").text($("#description" + id).val());
 
             if ($("#ticketstate" + id).val() === "Finished") {
-                $("#closecommentText").text($("#closeComment" + id).val());
                 $("#closeComment").css("display", "block");
+                
+                $("#closecommentText").text($("#closingComment" + id).val());
+               
             } else {
 
                 $("#closeComment").css("display", "none");
