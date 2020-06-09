@@ -40,6 +40,7 @@ namespace ExtraSupports.Pages.Tickets
 
         public async Task OnGetAsync()
         {
+            TicketCount = TicketService.getActiveTicketsCount();
             AllTickets = await TicketService.GetPaginatedResult(CurrentPage, PageSize);
             Count = await TicketService.GetCount();
         }
