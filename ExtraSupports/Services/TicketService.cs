@@ -41,7 +41,7 @@ namespace ExtraSupports.Services
         public async Task<List<Ticket>> GetPaginatedResult(int currentPage, int pageSize = 10)
         {
             var data = await GetData();
-            return data.OrderBy(d => d.TicketId).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            return data.OrderByDescending(order => order.CreateDate).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
         }
 
         public async Task<Ticket> HandleReceivedTicketAsync(Ticket receivedTicket)

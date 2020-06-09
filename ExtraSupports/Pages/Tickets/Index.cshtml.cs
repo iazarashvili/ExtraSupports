@@ -5,6 +5,7 @@ using ExtraSupports.Models;
 using ExtraSupports.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace ExtraSupports.Pages.Tickets
 {
@@ -38,10 +39,22 @@ namespace ExtraSupports.Pages.Tickets
             TicketService = ticketService;
         }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string searchString)
         {
             AllTickets = await TicketService.GetPaginatedResult(CurrentPage, PageSize);
-            Count = await TicketService.GetCount();
+           
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                AllTickets = AllTickets.Where(s => s.Title.Contains(searchString)).ToList();
+                TicketCount = TicketService.getActiveTicketsCount();
+                Count = await TicketService.GetCount();
+            }
+            else
+            {
+                TicketCount = TicketService.getActiveTicketsCount();
+                Count = await TicketService.GetCount();
+            }
+          
         }
      
         public async Task<IActionResult> OnPostSendBugTicket()

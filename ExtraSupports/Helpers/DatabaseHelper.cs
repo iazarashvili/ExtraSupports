@@ -32,7 +32,7 @@ namespace ExtraSupports.Helpers
         public ICollection<Ticket> GetAllTickets()
         {
            
-            return allTickets.FindAll().OrderByDescending(order => order.CreateDate).ToList();
+            return allTickets.FindAll().ToList();
 
         }
 
