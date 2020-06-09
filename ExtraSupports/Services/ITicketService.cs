@@ -9,7 +9,6 @@ namespace ExtraSupports.Services
     public interface ITicketService
     {
         Task<Ticket> HandleReceivedTicketAsync(Ticket receivedTicket);
-        Task<List<Ticket>> GetAllTickets();
         Task<List<Ticket>> GetPaginatedResult(int currentPage, int pageSize = 10);
         void CloseTicket(Guid ticketId,string closeComment);
         void RemoveTisket(Guid ticket);

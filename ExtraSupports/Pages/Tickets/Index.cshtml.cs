@@ -43,12 +43,7 @@ namespace ExtraSupports.Pages.Tickets
             AllTickets = await TicketService.GetPaginatedResult(CurrentPage, PageSize);
             Count = await TicketService.GetCount();
         }
-       //public void OnGet()
-       // {
-       //     TicketCount = TicketService.getActiveTicketsCount();
-       //     AllTickets = TicketService.GetAllTickets().Result;
-       // }
-
+     
         public async Task<IActionResult> OnPostSendBugTicket()
         {
             
