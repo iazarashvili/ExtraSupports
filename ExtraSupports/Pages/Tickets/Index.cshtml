@@ -6,32 +6,31 @@
 }
 
 
-<div class="card ">
-    <div class="card-header">
-        <h3 class="card-title">DataTable with default features</h3>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body ">
-        <div id="example1_wrapper"  class="dataTables_wrapper dt-bootstrap4 align-content-around">
-            <form>
-                <p>
-                    Title: <input type="text" name="SearchString">
-                    <input type="submit" value="Search" />
-                </p>
-            </form>
-            </div>
-            <!--show Category-->
-            <div>
-                <div class="row" style="opacity:0.5" )">
-                    <div class="col-lg-6 contactcard">
+    <div class="card shadow p-3 mb-5 bg-white rounded ">
+        <div class="card-header">
+            <h3 class="card-title">DataTable with default features</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class=" alig d-flex bd-highlight mb-3 ">
+            <div class="p-2 bd-highlight">
+                <div style="opacity:0.5" )">
+                    <div class="p-2 flex-fill bd-highlight">
                         <img src="https://image.flaticon.com/icons/svg/1612/1612229.svg" height="40" width="40" alt="Feature-Support-Icon fehlt" title="FeatureSenden" style="margin-bottom:1rem;" class="img-fluid" />
                         <button class="btn btn-primary" style="background-color:#28A745;" id="bug-button" onclick="displayItems()">Create Bug</button>
-
                     </div>
                 </div>
             </div>
+            <div class="ml-auto p-2 bd-highlight">
+                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <form>
+                        <p>
+                            Title: <input type="text" name="SearchString">
+                            <input type="submit" value="Search" />
+                        </p>
+                    </form>
+                </div>
+            </div>
         </div>
-
         <!--Creating ticket-->
         <section style="display:none; margin-top:4rem;" id="formsection">
             <div class="container id="myDIV">
@@ -59,7 +58,7 @@
                                         <textarea id="description" name="description" class="form-control" rows="4" asp-for="Description" minlength="5" maxlength="1000" required></textarea>
 
                                     </div>
-                                    <button  id="btn_submit_Bug" type="submit" class="btn btn-success btn-lg" style="display:none">Send</button>
+                                    <button id="btn_submit_Bug" type="submit" class="btn btn-success btn-lg" style="display:none">Send</button>
                                     <br />
                                     <br />
                                     <br />
