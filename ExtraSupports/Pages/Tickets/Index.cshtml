@@ -6,240 +6,214 @@
 }
 
 
-    <div class="card shadow p-3 mb-5 bg-white rounded ">
-        <div class="card-header">
-            <h3 class="card-title">DataTable with default features</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class=" alig d-flex bd-highlight mb-3 ">
-            <div class="p-2 bd-highlight">
-                <div style="opacity:0.5" )">
-                    <div class="p-2 flex-fill bd-highlight">
-                        <img src="https://image.flaticon.com/icons/svg/1612/1612229.svg" height="40" width="40" alt="Feature-Support-Icon fehlt" title="FeatureSenden" style="margin-bottom:1rem;" class="img-fluid" />
-                        <button class="btn btn-primary" style="background-color:#28A745;" id="bug-button" onclick="displayItems()">Create Bug</button>
-                    </div>
-                </div>
-            </div>
-            <div class="ml-auto p-2 bd-highlight ">
-                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4 p-2">
-                    <form>
-                        <p>
-                            <input type="text" name="SearchString">
-                            <input type="submit" value="Search" />
-                        </p>
-                    </form>
+<div class="card shadow p-3 mb-5 bg-white rounded ">
+    <div class="card-header">
+        <h3 class="card-title">DataTable with default features</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class=" alig d-flex bd-highlight mb-3 ">
+        <div class="p-2 bd-highlight">
+            <div style="opacity:0.5" )">
+                <div class="p-2 flex-fill bd-highlight">
+                    <img src="https://image.flaticon.com/icons/svg/1612/1612229.svg" height="40" width="40" alt="Feature-Support-Icon fehlt" title="FeatureSenden" style="margin-bottom:1rem;" class="img-fluid" />
+                    <button class="btn btn-primary" style="background-color:#28A745;" id="bug-button" onclick="displayItems()">Create Bug</button>
                 </div>
             </div>
         </div>
-        <!--Creating ticket-->
-        <section style="display:none; margin-top:4rem;" id="formsection">
-            <div class="container id="myDIV">
-                <div>
-                    <div>
-                        <div class="card">
-                            <div class="card-body">
-                                <form asp-page-handler="SendBugTicket" method="post">
-
-                                    <div id="ticketTitle" class="form-group" style="display:none">
-                                        <lable for="subject">Title</lable>
-                                        <input id="title" name="title" type="text" class="form-control" asp-for="Title" minlength="3" maxlength="1000" required />
-                                    </div>
-                                    <div id="Email" class="form-group" style="display:none">
-                                        <lable for="subject">Email</lable>
-                                        <input id="Email" name="Email" type="text" class="form-control" asp-for="Email" minlength="3" maxlength="1000" required />
-                                    </div>
-                                    <div id="PhoneNumber" class="form-group" style="display:none">
-                                        <lable for="subject">PhoneNumber</lable>
-                                        <input id="PhoneNumber" name="PhoneNumber" type="text" class="form-control" asp-for="PhoneNumber" minlength="3" maxlength="1000" required />
-                                    </div>
-
-                                    <div id="ticketDescription" class="form-group" style="display:none">
-                                        <lable id="ticketLableDescription" style="display:none">Discription</lable>
-                                        <textarea id="description" name="description" class="form-control" rows="4" asp-for="Description" minlength="5" maxlength="1000" required></textarea>
-
-                                    </div>
-                                    <button id="btn_submit_Bug" type="submit" class="btn btn-success btn-lg" style="display:none">Send</button>
-                                    <br />
-                                    <br />
-                                    <br />
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="ml-auto p-2 bd-highlight ">
+            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4 p-2">
+                <form style="padding-top:7%">
+                    <p>
+                        <input type="text" name="SearchString">
+                        <input type="submit" value="Search" />
+                    </p>
+                </form>
             </div>
-        </section>
-        <div class="row col-lg-12 ">
-
-            <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid"
-                   aria-describedby="example1_info">
-                <thead>
-                    <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-sort="ascending"
-                            aria-label="Rendering engine: activate to sort column descending">
-                            სათაური
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Platform(s): activate to sort column ascending">ტელეფონი</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Engine version: activate to sort column ascending">ელ. ფოსტა</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Engine version: activate to sort column ascending">შექმნის დრო</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="Engine version: activate to sort column ascending">სტატუსი</th>
-                        <th class="sorting" tabindex="0" style="width: 10%" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending">ინფო</th>
-                        <th class="sorting" tabindex="0" style="width: 5%" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending">ქმედება</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.AllTickets)
-                    {
-
-                        <tr role="row" class="odd" style="@(item.TicketState==Enums.TicketState.Active ? "background-color:#C4C4C4;" : "background-color:#F9F9F9;")">
-                            <td tabindex="0" class="sorting_1">@item.Title</td>
-                            <td>@item.PhoneNumber</td>
-                            <td>@item.Email</td>
-                            <td>@item.CreateDate</td>
-                            <td>@item.TicketState</td>
-
-                            <td>
-                                <input type="hidden" id="@("ticketid"+item.TicketId)" value="@item.TicketId" />
-                                <input type="hidden" id="@("phonenumber"+item.TicketId)" value="@item.PhoneNumber" />
-                                <input type="hidden" id="@("email"+item.TicketId)" value="@item.Email" />
-                                <input type="hidden" id="@("ticketstate"+item.TicketId)" value="@item.TicketState" />
-                                <input type="hidden" id="@("title"+item.TicketId)" value="@item.Title" />
-                                <input type="hidden" id="@("createdate"+item.TicketId)" value="@item.CreateDate" />
-                                <input type="hidden" id="@("description"+item.TicketId)" value="@item.Description" />
-                                <input type="hidden" id="@("closingComment"+item.TicketId)" value="@item.CloseComment" />
-                                <button type="button" id="@item.TicketId" class="btn btn-secondary" data-toggle="modal" onclick="modalFunction(this)" data-target="#myModal" data-placement="top">დეტალურად</button>
-
-                            </td>
-                            <td>
-
-                                <div class="input-group-prepend">
-                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        Action
-                                    </button>
-                                    <div class="dropdown-menu">
-
-                                        <button class="dropdown-item" id="@item.TicketId" data-toggle="modal" onclick="receiveTicketId(this)" data-target="#exampleModal" type="button">დახურვა</button>
-
-                                        <div class="dropdown-divider"></div>
-                                        <form method="post" asp-page-handler="DeleteTicket">
-                                            <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
-                                            <button class="dropdown-item" type="submit">წაშლა</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">დახურვის კომენტარი</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form method="post" asp-page-handler="CloseTicket">
-                                                    <div class="form-group">
-                                                        <label for="message-text" class="col-form-label">შეიყვანეთ დახურვის კომენტარი</label>
-                                                        <textarea id="closeComments" name="closecomment" class="form-control" rows="4" asp-for="CloseComment" minlength="5" maxlength="1000" required></textarea>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <input type="hidden" name="closeTicketId" id="closeTicketId" />
-                                                        <button type="submit" class="btn btn-primary">ბილეთის დახურვა</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            @*<td>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">დახურვის კომენტარი</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form method="post" asp-page-handler="CloseTicket">
-                                                    <div class="form-group">
-                                                        <label for="message-text" class="col-form-label">შეიყვანეთ დახურვის კომენტარი</label>
-                                                        <textarea id="closeComments" name="closecomment" class="form-control" rows="4" asp-for="CloseComment" minlength="5" maxlength="1000" required></textarea>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <input type="hidden" name="closeTicketId" id="closeTicketId"  />
-                                                        <button type="submit" class="btn btn-primary">ბილეთის დახურვა</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>*@
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title" id="detailsModalCenterLongTitle"><b style="text-align:center;">Ticket details</b></h2>
-                    </div>
-                    <div class="modal-body">
-
-                        <h5>სათაური</h5>
-                        <p id="titleModal"></p>
-                        <hr />
-                        <h5>სტატუსი</h5>
-                        <p id="ticketstate"></p>
-                        <h5>შექმნის დრო</h5>
-                        <p id="createDate"></p>
-                        <hr />
-                        <h5>ტელეფონი</h5>
-                        <p id="phoneNumber"></p>
-                        <hr />
-                        <h5>ელ. ფოსტა</h5>
-                        <p id="email"></p>
-                        <hr />
-                        <h5>აღწერა</h5>
-                        <p id="descriptionText"></p>
-                        <hr />
-                        <div id="closeComment">
-                            <h5>დახურვის კომენტარი</h5>
-                            <p id="closecommentText"></p>
-                            <hr />
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">დახურვა</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div>
-            <ul class="pagination">
-                @for (var i = 1; i <= Model.TotalPages; i++)
-                {
-                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                        <a asp-page="/Tickets/Index" asp-route-currentpage="@i" class="page-link">@i</a>
-                    </li>
-                }
-            </ul>
         </div>
     </div>
+    <!--Creating ticket-->
+    <section style="display:none; margin-top:4rem;" id="formsection">
+        <div class="container id="myDIV">
+            <div>
+                <div>
+                    <div class="card">
+                        <div class="card-body">
+                            <form asp-page-handler="SendBugTicket" method="post">
+
+                                <div id="ticketTitle" class="form-group" style="display:none">
+                                    <lable for="subject">Title</lable>
+                                    <input id="title" name="title" type="text" class="form-control" asp-for="Title" minlength="3" maxlength="1000" required />
+                                </div>
+                                <div id="Email" class="form-group" style="display:none">
+                                    <lable for="subject">Email</lable>
+                                    <input id="Email" name="Email" type="text" class="form-control" asp-for="Email" minlength="3" maxlength="1000" required />
+                                </div>
+                                <div id="PhoneNumber" class="form-group" style="display:none">
+                                    <lable for="subject">PhoneNumber</lable>
+                                    <input id="PhoneNumber" name="PhoneNumber" type="text" class="form-control" asp-for="PhoneNumber" minlength="3" maxlength="1000" required />
+                                </div>
+
+                                <div id="ticketDescription" class="form-group" style="display:none">
+                                    <lable id="ticketLableDescription" style="display:none">Discription</lable>
+                                    <textarea id="description" name="description" class="form-control" rows="4" asp-for="Description" minlength="5" maxlength="1000" required></textarea>
+
+                                </div>
+                                <button id="btn_submit_Bug" type="submit" class="btn btn-success btn-lg" style="display:none">Send</button>
+                                <br />
+                                <br />
+                                <br />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="row col-lg-12 ">
+
+        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid"
+               aria-describedby="example1_info">
+            <thead>
+                <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-sort="ascending"
+                        aria-label="Rendering engine: activate to sort column descending">
+                        სათაური
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="Platform(s): activate to sort column ascending">ტელეფონი</th>
+                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="Engine version: activate to sort column ascending">ელ. ფოსტა</th>
+                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="Engine version: activate to sort column ascending">შექმნის დრო</th>
+                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="Engine version: activate to sort column ascending">სტატუსი</th>
+                    <th class="sorting" tabindex="0" style="width: 10%" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="CSS grade: activate to sort column ascending">ინფო</th>
+                    <th class="sorting" tabindex="0" style="width: 5%" aria-controls="example1" rowspan="1" colspan="1"
+                        aria-label="CSS grade: activate to sort column ascending">ქმედება</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.AllTickets)
+                {
+
+                    <tr role="row" class="odd" style="@(item.TicketState==Enums.TicketState.Active ? "background-color:#C4C4C4;" : "background-color:#F9F9F9;")">
+                        <td tabindex="0" class="sorting_1">@item.Title</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.Email</td>
+                        <td>@item.CreateDate</td>
+                        <td>@item.TicketState</td>
+
+                        <td>
+                            <input type="hidden" id="@("ticketid"+item.TicketId)" value="@item.TicketId" />
+                            <input type="hidden" id="@("phonenumber"+item.TicketId)" value="@item.PhoneNumber" />
+                            <input type="hidden" id="@("email"+item.TicketId)" value="@item.Email" />
+                            <input type="hidden" id="@("ticketstate"+item.TicketId)" value="@item.TicketState" />
+                            <input type="hidden" id="@("title"+item.TicketId)" value="@item.Title" />
+                            <input type="hidden" id="@("createdate"+item.TicketId)" value="@item.CreateDate" />
+                            <input type="hidden" id="@("description"+item.TicketId)" value="@item.Description" />
+                            <input type="hidden" id="@("closingComment"+item.TicketId)" value="@item.CloseComment" />
+                            <button type="button" id="@item.TicketId" class="btn btn-secondary" data-toggle="modal" onclick="modalFunction(this)" data-target="#myModal" data-placement="top">დეტალურად</button>
+
+                        </td>
+                        <td>
+
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu">
+
+                                    <button class="dropdown-item" id="@item.TicketId" @(item.TicketState==Enums.TicketState.Finished ? "disabled":"") data-toggle="modal" onclick="receiveTicketId(this)" data-target="#exampleModal" type="button">დახურვა</button>
+
+                                    <div class="dropdown-divider"></div>
+                                    <form method="post" asp-page-handler="DeleteTicket">
+                                        <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
+                                        <button class="dropdown-item" type="submit">წაშლა</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">დახურვის კომენტარი</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post" asp-page-handler="CloseTicket">
+                                                <div class="form-group">
+                                                    <label for="message-text" class="col-form-label">შეიყვანეთ დახურვის კომენტარი</label>
+                                                    <textarea id="closeComments" name="closecomment" class="form-control" rows="4" asp-for="CloseComment" minlength="5" maxlength="1000" required></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="hidden" name="closeTicketId" id="closeTicketId" />
+                                                    <button type="submit" class="btn btn-primary">ბილეთის დახურვა</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="detailsModalCenterLongTitle"><b style="text-align:center;">Ticket details</b></h2>
+                </div>
+                <div class="modal-body">
+
+                    <h5>სათაური</h5>
+                    <p id="titleModal"></p>
+                    <hr />
+                    <h5>სტატუსი</h5>
+                    <p id="ticketstate"></p>
+                    <h5>შექმნის დრო</h5>
+                    <p id="createDate"></p>
+                    <hr />
+                    <h5>ტელეფონი</h5>
+                    <p id="phoneNumber"></p>
+                    <hr />
+                    <h5>ელ. ფოსტა</h5>
+                    <p id="email"></p>
+                    <hr />
+                    <h5>აღწერა</h5>
+                    <p id="descriptionText"></p>
+                    <hr />
+                    <div id="closeComment">
+                        <h5>დახურვის კომენტარი</h5>
+                        <p id="closecommentText"></p>
+                        <hr />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">დახურვა</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <ul class="pagination">
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a asp-page="/Tickets/Index" asp-route-currentpage="@i" class="page-link">@i</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
 </div>
 <!-- /.card-body -->
                 </div>
@@ -274,9 +248,9 @@
 
             if ($("#ticketstate" + id).val() === "Finished") {
                 $("#closeComment").css("display", "block");
-                
+
                 $("#closecommentText").text($("#closingComment" + id).val());
-               
+
             } else {
 
                 $("#closeComment").css("display", "none");
@@ -288,17 +262,17 @@
     <script>
         function receiveTicketId(myButton) {
             var id = $(myButton).attr("id");
-            console.log(id);
 
             $('input[name="closeTicketId"]').val(id);
         }
     </script>
     <script>
-         $("#btn_submit_Bug").click(function () {
+        $("#btn_submit_Bug").click(function () {
             this.disabled = true;
-             this.form.submit();
+            this.form.submit();
         });
     </script>
 
+   
 }
 }
