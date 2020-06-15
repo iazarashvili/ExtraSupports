@@ -13,7 +13,8 @@ namespace ExtraSupports.Services
         void CloseTicket(Guid ticketId,string closeComment);
         void RemoveTisket(Guid ticket);
         int getActiveTicketsCount();
-
+        int getFinishedTicketsCount();
         Task<int> GetCount();
+        
     }
 }

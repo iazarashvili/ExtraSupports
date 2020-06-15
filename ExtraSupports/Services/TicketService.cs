@@ -25,7 +25,12 @@ namespace ExtraSupports.Services
            return  DatabaseHelper.getActiveTicketCount();
         }
 
-    
+        public int getFinishedTicketsCount()
+        {
+            return DatabaseHelper.getFinishedTicketsCount();
+        }
+
+
         private  async Task<List<Ticket>> GetData()
         {
             return  DatabaseHelper.GetAllTickets().ToList();

@@ -99,8 +99,8 @@
                             <!-- small box -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3>150</h3>
-                                    <p>New Orders</p>
+                                    <h3>@Model.TicketCount</h3>
+                                    <p>New Tickets</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
@@ -113,8 +113,8 @@
                             <!-- small box -->
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-                                    <p>Bounce Rate</p>
+                                    <h3>@Model.FinishedCount</h3>
+                                    <p>Finished Tickets</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
@@ -186,6 +186,12 @@
     <script>
         $(document).ready(function () {
             $('#ticketcount').html(@Model.TicketCount);
+        console.log("asdasd");
+    });
+    </script>
+    <script>
+             $(document).ready(function () {
+                 $('#finishedCount').html(@Model.FinishedCount);
         console.log("asdasd");
     });
     </script>

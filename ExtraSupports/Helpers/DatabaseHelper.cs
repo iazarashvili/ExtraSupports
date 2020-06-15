@@ -29,6 +29,10 @@ namespace ExtraSupports.Helpers
             return allTickets.FindAll().Where(x => x.TicketState == TicketState.Active).Count();
         }
 
+        public int getFinishedTicketsCount()
+        {
+            return allTickets.FindAll().Where(x => x.TicketState == TicketState.Finished).Count();
+        }
         public ICollection<Ticket> GetAllTickets()
         {
            

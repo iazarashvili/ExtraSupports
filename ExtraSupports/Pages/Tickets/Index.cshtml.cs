@@ -34,6 +34,8 @@ namespace ExtraSupports.Pages.Tickets
         public List<Ticket> AllTickets { get; set; } 
         public int TicketCount { get; set; }
 
+        public int FinishedCount { get; set; }
+
         public IndexModel(ITicketService ticketService)
         {
             TicketService = ticketService;
@@ -47,10 +49,12 @@ namespace ExtraSupports.Pages.Tickets
             {
                 AllTickets = AllTickets.Where(s => s.Title.Contains(searchString)).ToList();
                 TicketCount = TicketService.getActiveTicketsCount();
+                FinishedCount = TicketService.getFinishedTicketsCount();
                 Count = await TicketService.GetCount();
             }
             else
             {
+                FinishedCount = TicketService.getFinishedTicketsCount();
                 TicketCount = TicketService.getActiveTicketsCount();
                 Count = await TicketService.GetCount();
             }

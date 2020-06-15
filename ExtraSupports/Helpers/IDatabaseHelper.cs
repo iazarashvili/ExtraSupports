@@ -14,5 +14,7 @@ namespace ExtraSupports.Helpers
         ICollection<Ticket> GetAllTickets();
         void RemoveItem(Guid ticket);
         int getActiveTicketCount();
+        int getFinishedTicketsCount();
+
     }
 }

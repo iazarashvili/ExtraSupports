@@ -15,6 +15,7 @@ namespace ExtraSupports.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly ITicketService TicketService;
         public int TicketCount { get; set; }
+        public int FinishedCount { get; set; }
         public IndexModel(ILogger<IndexModel> logger,ITicketService ticketService)
         {
             _logger = logger;
@@ -24,6 +25,8 @@ namespace ExtraSupports.Pages
         public void OnGet()
         {
             TicketCount =  TicketService.getActiveTicketsCount();
+            FinishedCount = TicketService.getFinishedTicketsCount();
+           
         }
     }
 }
