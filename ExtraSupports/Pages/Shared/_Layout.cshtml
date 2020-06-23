@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model Tickets.IndexModel
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -71,8 +72,8 @@
                                 </p>
                             </a>
                     </ul>
-                    
-                      </nav>
+
+                </nav>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
@@ -100,7 +101,7 @@
                             <div class="small-box bg-info">
                                 <div class="inner">
                                     <h3>@Model.TicketCount</h3>
-                                    <p>New Tickets</p>
+                                    <p>Open Tickets</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
@@ -127,8 +128,8 @@
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>44</h3>
-                                    <p>User Registrations</p>
+                                    <h3>@Model.Count</h3>
+                                    <p>All Tickets</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
@@ -195,6 +196,7 @@
         console.log("asdasd");
     });
     </script>
+
     <!-- Bootstrap 4 -->
     <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->
