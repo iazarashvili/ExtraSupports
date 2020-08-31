@@ -1,10 +1,21 @@
-﻿using ExtraSupports.Helpers;
+﻿using System;
+using EventFlow.AspNetCore.Extensions;
+using EventFlow.DependencyInjection.Extensions;
+using EventFlow.EventStores.EventStore.Extensions;
+using EventFlow.Extensions;
+using EventFlow.MongoDB.Extensions;
+using EventStore.ClientAPI;
+using EventStore.ClientAPI.SystemData;
+using ExtraSupport.Application.ReadModels;
+using ExtraSupport.Infrastructure;
+using ExtraSupports.Helpers;
 using ExtraSupports.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 
 namespace ExtraSupports
 {
@@ -21,8 +32,28 @@ namespace ExtraSupports
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddMvc();
+            var eventflowDatabasesettings = new DatabaseSetting();
             services.AddSingleton<IDatabaseHelper, DatabaseHelper>();
             services.AddTransient<ITicketService, TicketService>();
+            this.Configuration.GetSection("DatabaseSettings").Bind(eventflowDatabasesettings);
+
+            ConnectionSettingsBuilder connectionSettings = ConnectionSettings.Create()
+                .SetDefaultUserCredentials(new UserCredentials(eventflowDatabasesettings.EventstoreUser, eventflowDatabasesettings.EventstorePW));
+
+            services.AddEventFlow(o =>
+            {
+                o.AddDefaults(typeof(Program).Assembly); //Reinladen der Assembly (Projekt wo Commands, Handler und Events sind, können auch mehrere Projekte sein)
+                o.Configure(c => c.IsAsynchronousSubscribersEnabled = true); //Enable subscribers
+
+                o.UseEventStoreEventStore(new Uri(eventflowDatabasesettings.EventStoreUri), connectionSettings);//Eventstore einrichten
+                o.ConfigureMongoDb(eventflowDatabasesettings.MongoDBUri, eventflowDatabasesettings.DatabaseReadModels); //MOngoDb einrichten
+
+                o.UseMongoDbReadModel<TicketReadModel>(); //ReadModel registrieren
+                o.AddAspNetCore();
+
+
+            });
 
         }
 

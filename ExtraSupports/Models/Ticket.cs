@@ -23,8 +23,14 @@ namespace ExtraSupports.Models
         [DataType(DataType.Date)]
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
-        public Ticket()
+        public Ticket(Guid ticketId, string title, string description, string phoneNumber, string closeComment, string email)
         {
+            TicketId = ticketId;
+            Title = title;
+            Description = description;
+            PhoneNumber = phoneNumber;
+            CloseComment = closeComment;
+            Email = email;
         }
         
         public Ticket(Ticket ticket)

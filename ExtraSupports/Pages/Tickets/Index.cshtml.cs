@@ -2,10 +2,16 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ExtraSupports.Models;
-using ExtraSupports.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Threading;
+using EventFlow;
+using EventFlow.Queries;
+using ExtraSupport.Application;
+using ExtraSupport.Domain;
+using ExtraSupport.Domain.Commands;
+using ExtraSupports.Services;
 
 namespace ExtraSupports.Pages.Tickets
 {
@@ -18,6 +24,8 @@ namespace ExtraSupports.Pages.Tickets
         public int PageSize { get; set; } = 10;
 
         public int TotalPages => (int)Math.Ceiling(decimal.Divide(Count, PageSize));
+
+       public ExtraSupportApplication Application { get; set; }
 
         [BindProperty]
         public string CloseComment { get; set; }
@@ -36,15 +44,17 @@ namespace ExtraSupports.Pages.Tickets
 
         public int FinishedCount { get; set; }
 
-        public IndexModel(ITicketService ticketService)
+        public IndexModel(ExtraSupportApplication application)
         {
-            TicketService = ticketService;
+            Application = application;
         }
 
         public async Task OnGetAsync(string searchString)
         {
-            AllTickets = await TicketService.GetPaginatedResult(CurrentPage, PageSize);
-           
+            var tickets = await Application.GetAllTickets();
+
+            
+            //tickets.Select(x => AllTickets.Add(x.Tickets.Select(y => new Ticket(y.TicketId, y.Title, y.Description, y.PhoneNumber, y.CloseComment, y.Email))));
             if (!String.IsNullOrEmpty(searchString))
             {
                 AllTickets = AllTickets.Where(s => s.Title.Contains(searchString)).ToList();
@@ -66,20 +76,12 @@ namespace ExtraSupports.Pages.Tickets
             
             if (ModelState.IsValid)
             {
-                //createBugTicket:
-                var ticket = new Ticket()
-                {
-                    TicketId = Guid.NewGuid(),
-                    Title = Title,
-                    Description = Description,
-                    PhoneNumber=PhoneNumber,
-                    Email=Email
-
-                };
-
-                await TicketService.HandleReceivedTicketAsync(ticket);
+                var identity = TicketId.New;
+                var command = new AddTicket(identity, new ExtraSupport.Domain.ValueObjects.Ticket(CloseComment, Title, PhoneNumber, Email, Description));
+                await  Application.PublishAsync(command);
 
                 return RedirectToPage("/Tickets/Index");
+    
             }
 
             return this.Page();
