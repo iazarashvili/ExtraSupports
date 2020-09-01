@@ -6,10 +6,9 @@ using EventFlow.Extensions;
 using EventFlow.MongoDB.Extensions;
 using EventStore.ClientAPI;
 using EventStore.ClientAPI.SystemData;
+using ExtraSupport.Application;
 using ExtraSupport.Application.ReadModels;
 using ExtraSupport.Infrastructure;
-using ExtraSupports.Helpers;
-using ExtraSupports.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -34,8 +33,7 @@ namespace ExtraSupports
             services.AddRazorPages();
             services.AddMvc();
             var eventflowDatabasesettings = new DatabaseSetting();
-            services.AddSingleton<IDatabaseHelper, DatabaseHelper>();
-            services.AddTransient<ITicketService, TicketService>();
+
             this.Configuration.GetSection("DatabaseSettings").Bind(eventflowDatabasesettings);
 
             ConnectionSettingsBuilder connectionSettings = ConnectionSettings.Create()
@@ -51,6 +49,10 @@ namespace ExtraSupports
 
                 o.UseMongoDbReadModel<TicketReadModel>(); //ReadModel registrieren
                 o.AddAspNetCore();
+                o.RegisterServices(s =>
+                {
+                    s.Register<ExtraSupportApplication, ExtraSupportApplication>();
+                });
 
 
             });

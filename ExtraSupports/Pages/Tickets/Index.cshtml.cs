@@ -1,17 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ExtraSupports.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using System.Threading;
-using EventFlow;
-using EventFlow.Queries;
 using ExtraSupport.Application;
 using ExtraSupport.Domain;
 using ExtraSupport.Domain.Commands;
-using ExtraSupports.Services;
+using ExtraSupport.Domain.ValueObjects;
 
 namespace ExtraSupports.Pages.Tickets
 {
@@ -38,7 +34,6 @@ namespace ExtraSupports.Pages.Tickets
         public string Email { get; set; }
         [BindProperty]
         public string Description { get; set; }
-        private readonly ITicketService TicketService;
         public List<Ticket> AllTickets { get; set; } 
         public int TicketCount { get; set; }
 
@@ -52,21 +47,18 @@ namespace ExtraSupports.Pages.Tickets
         public async Task OnGetAsync(string searchString)
         {
             var tickets = await Application.GetAllTickets();
-
+            var ticket = new Ticket(Guid.NewGuid(),"BlaBla","sssdaasd","asdasfa","","asafasf");
+            AllTickets.Add(new Ticket(ticket));
             
             //tickets.Select(x => AllTickets.Add(x.Tickets.Select(y => new Ticket(y.TicketId, y.Title, y.Description, y.PhoneNumber, y.CloseComment, y.Email))));
             if (!String.IsNullOrEmpty(searchString))
             {
                 AllTickets = AllTickets.Where(s => s.Title.Contains(searchString)).ToList();
-                TicketCount = TicketService.getActiveTicketsCount();
-                FinishedCount = TicketService.getFinishedTicketsCount();
-                Count = await TicketService.GetCount();
+                
             }
             else
             {
-                FinishedCount = TicketService.getFinishedTicketsCount();
-                TicketCount = TicketService.getActiveTicketsCount();
-                Count = await TicketService.GetCount();
+             
             }
           
         }
@@ -77,7 +69,8 @@ namespace ExtraSupports.Pages.Tickets
             if (ModelState.IsValid)
             {
                 var identity = TicketId.New;
-                var command = new AddTicket(identity, new ExtraSupport.Domain.ValueObjects.Ticket(CloseComment, Title, PhoneNumber, Email, Description));
+                var newTicket= new Ticket(Guid.NewGuid(), Title,Description,PhoneNumber,CloseComment,Email);
+                var command = new AddTicket(identity,new Ticket(newTicket) );
                 await  Application.PublishAsync(command);
 
                 return RedirectToPage("/Tickets/Index");
@@ -93,7 +86,7 @@ namespace ExtraSupports.Pages.Tickets
             {
                 var ticketId = Request.Form["TicketId"];
                 Guid newguid = Guid.Parse(ticketId);
-                TicketService.RemoveTisket(newguid);
+                
                 return RedirectToPage("/Tickets/Index");
             }
             return this.Page();
@@ -105,7 +98,7 @@ namespace ExtraSupports.Pages.Tickets
             {
                 var ticketId = Request.Form["closeTicketId"];
                 Guid newguid = Guid.Parse(ticketId);
-                TicketService.CloseTicket(newguid, CloseComment);
+                
                 return RedirectToPage("/Tickets/Index");
             }
             return this.Page();
