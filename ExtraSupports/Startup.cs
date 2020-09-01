@@ -9,6 +9,7 @@ using EventStore.ClientAPI.SystemData;
 using ExtraSupport.Application;
 using ExtraSupport.Application.ReadModels;
 using ExtraSupport.Infrastructure;
+using ExtraSupport.Infrastructure.QueryHandler;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -42,6 +43,8 @@ namespace ExtraSupports
             services.AddEventFlow(o =>
             {
                 o.AddDefaults(typeof(Program).Assembly); //Reinladen der Assembly (Projekt wo Commands, Handler und Events sind, können auch mehrere Projekte sein)
+
+                o.AddDefaults(typeof(AllTicketsQueryHandler).Assembly);
                 o.Configure(c => c.IsAsynchronousSubscribersEnabled = true); //Enable subscribers
 
                 o.UseEventStoreEventStore(new Uri(eventflowDatabasesettings.EventStoreUri), connectionSettings);//Eventstore einrichten
