@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using ExtraSupport.Application;
+using ExtraSupport.Application.ReadModels;
 using ExtraSupport.Domain;
 using ExtraSupport.Domain.Commands;
 using ExtraSupport.Domain.ValueObjects;
@@ -34,7 +35,7 @@ namespace ExtraSupports.Pages.Tickets
         public string Email { get; set; }
         [BindProperty]
         public string Description { get; set; }
-        public List<Ticket> AllTickets { get; set; } =new List<Ticket>();
+        public List<TicketReadModel> AllTickets { get; set; } 
         public int TicketCount { get; set; }
 
         public int FinishedCount { get; set; }
@@ -46,21 +47,18 @@ namespace ExtraSupports.Pages.Tickets
 
         public async Task OnGetAsync(string searchString)
         {
-            //var tickets = await Application.GetAllTickets();
-            //var ticket = new Ticket(Guid.NewGuid(),"BlaBla","sssdaasd","asdasfa","","asafasf");
-            //AllTickets.Add(new Ticket(ticket));
+            AllTickets = await Application.GetAllTickets();
+
             
-            ////tickets.Select(x => AllTickets.Add(x.Tickets.Select(y => new Ticket(y.TicketId, y.Title, y.Description, y.PhoneNumber, y.CloseComment, y.Email))));
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    AllTickets = AllTickets.Where(s => s.Title.Contains(searchString)).ToList();
-                
-            //}
-            //else
-            //{
-             
-            //}
-          
+
+            //tickets.Select(x => AllTickets.Add(x.Tickets.Select(y => new Ticket(y.TicketId, y.Title, y.Description, y.PhoneNumber, y.CloseComment, y.Email))));
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                AllTickets = AllTickets.Where(s => s.Title.Contains(searchString)).ToList();
+
+            }
+           
+
         }
      
         public async Task<IActionResult> OnPostSendBugTicket()

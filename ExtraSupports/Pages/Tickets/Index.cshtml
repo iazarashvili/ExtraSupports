@@ -107,15 +107,15 @@
                         <td>@item.TicketState</td>
 
                         <td>
-                            <input type="hidden" id="@("ticketid"+item.TicketId)" value="@item.TicketId" />
-                            <input type="hidden" id="@("phonenumber"+item.TicketId)" value="@item.PhoneNumber" />
-                            <input type="hidden" id="@("email"+item.TicketId)" value="@item.Email" />
-                            <input type="hidden" id="@("ticketstate"+item.TicketId)" value="@item.TicketState" />
-                            <input type="hidden" id="@("title"+item.TicketId)" value="@item.Title" />
-                            <input type="hidden" id="@("createdate"+item.TicketId)" value="@item.CreateDate" />
-                            <input type="hidden" id="@("description"+item.TicketId)" value="@item.Description" />
-                            <input type="hidden" id="@("closingComment"+item.TicketId)" value="@item.CloseComment" />
-                            <button type="button" id="@item.TicketId" class="btn btn-secondary" data-toggle="modal" onclick="modalFunction(this)" data-target="#myModal" data-placement="top">დეტალურად</button>
+                            <input type="hidden" id="@("ticketid"+item.Id)" value="@item.Id" />
+                            <input type="hidden" id="@("phonenumber"+item.Id)" value="@item.PhoneNumber" />
+                            <input type="hidden" id="@("email"+item.Id)" value="@item.Email" />
+                            <input type="hidden" id="@("ticketstate"+item.Id)" value="@item.TicketState" />
+                            <input type="hidden" id="@("title"+item.Id)" value="@item.Title" />
+                            <input type="hidden" id="@("createdate"+item.Id)" value="@item.CreateDate" />
+                            <input type="hidden" id="@("description"+item.Id)" value="@item.Description" />
+                            <input type="hidden" id="@("closingComment"+item.Id)" value="@item.CloseComment" />
+                            <button type="button" id="@item.Id" class="btn btn-secondary" data-toggle="modal" onclick="modalFunction(this)" data-target="#myModal" data-placement="top">დეტალურად</button>
 
                         </td>
                         <td>
@@ -126,11 +126,11 @@
                                 </button>
                                 <div class="dropdown-menu">
 
-                                    <button class="dropdown-item" id="@item.TicketId" @(item.TicketState==Enums.TicketState.Finished ? "disabled":"") data-toggle="modal" onclick="receiveTicketId(this)" data-target="#exampleModal" type="button">დახურვა</button>
+                                    <button class="dropdown-item" id="@item.Id" @(item.TicketState==Enums.TicketState.Finished ? "disabled":"") data-toggle="modal" onclick="receiveTicketId(this)" data-target="#exampleModal" type="button">დახურვა</button>
 
                                     <div class="dropdown-divider"></div>
                                     <form method="post" asp-page-handler="DeleteTicket">
-                                        <input type="hidden" name="TicketId" id="TicketId" value="@item.TicketId" />
+                                        <input type="hidden" name="TicketId" id="TicketId" value="@item.Id" />
                                         <button class="dropdown-item" type="submit">წაშლა</button>
                                     </form>
                                 </div>
