@@ -1,12 +1,13 @@
 ﻿using System;
 using EventFlow.ValueObjects;
 using ExtraSupports.Enums;
+using Newtonsoft.Json;
 
 namespace ExtraSupport.Domain.ValueObjects
 {
     public class Ticket:ValueObject
     {
-        public Guid TicketId { get; set; }
+        public TicketId TicketId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string PhoneNumber { get; set; }
@@ -17,7 +18,8 @@ namespace ExtraSupport.Domain.ValueObjects
 
        public DateTime CreateDate { get; set; } = DateTime.Now;
 
-        public Ticket(Guid ticketId, string title, string description, string phoneNumber, string closeComment, string email)
+       [JsonConstructor]
+       public Ticket(TicketId ticketId, string title, string description, string phoneNumber, string closeComment, string email)
         {
             TicketId = ticketId;
             Title = title;

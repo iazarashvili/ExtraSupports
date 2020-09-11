@@ -5,20 +5,18 @@ using ExtraSupport.Domain.ValueObjects;
 
 namespace ExtraSupport.Domain
 {
-    public class TicketAggregate:AggregateRoot<TicketAggregate,TicketId>, IApply<TicketAdded>
+    public class MainAggregate:AggregateRoot<MainAggregate,TicketId>,
+        IApply<TicketAdded>
     {
-        public List<Ticket> Tickets { get; set; }
-        public TicketAggregate(TicketId id) : base(id)
+        public Ticket Ticket { get; set; }
+
+        public MainAggregate(TicketId id) : base(id)
         {
         }
 
         public void Apply(TicketAdded aggregateEvent)
         {
-            if (Tickets == null)
-            {
-                Tickets = new List<Ticket>();
-            }
-            Tickets.Add(aggregateEvent.Ticket);
+            Ticket = aggregateEvent.Ticket;
         }
 
         public void AddTicket(Ticket ticket)

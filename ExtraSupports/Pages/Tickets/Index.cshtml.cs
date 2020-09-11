@@ -34,7 +34,7 @@ namespace ExtraSupports.Pages.Tickets
         public string Email { get; set; }
         [BindProperty]
         public string Description { get; set; }
-        public List<Ticket> AllTickets { get; set; } 
+        public List<Ticket> AllTickets { get; set; } =new List<Ticket>();
         public int TicketCount { get; set; }
 
         public int FinishedCount { get; set; }
@@ -46,20 +46,20 @@ namespace ExtraSupports.Pages.Tickets
 
         public async Task OnGetAsync(string searchString)
         {
-            var tickets = await Application.GetAllTickets();
-            var ticket = new Ticket(Guid.NewGuid(),"BlaBla","sssdaasd","asdasfa","","asafasf");
-            AllTickets.Add(new Ticket(ticket));
+            //var tickets = await Application.GetAllTickets();
+            //var ticket = new Ticket(Guid.NewGuid(),"BlaBla","sssdaasd","asdasfa","","asafasf");
+            //AllTickets.Add(new Ticket(ticket));
             
-            //tickets.Select(x => AllTickets.Add(x.Tickets.Select(y => new Ticket(y.TicketId, y.Title, y.Description, y.PhoneNumber, y.CloseComment, y.Email))));
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                AllTickets = AllTickets.Where(s => s.Title.Contains(searchString)).ToList();
+            ////tickets.Select(x => AllTickets.Add(x.Tickets.Select(y => new Ticket(y.TicketId, y.Title, y.Description, y.PhoneNumber, y.CloseComment, y.Email))));
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    AllTickets = AllTickets.Where(s => s.Title.Contains(searchString)).ToList();
                 
-            }
-            else
-            {
+            //}
+            //else
+            //{
              
-            }
+            //}
           
         }
      
@@ -69,7 +69,8 @@ namespace ExtraSupports.Pages.Tickets
             if (ModelState.IsValid)
             {
                 var identity = TicketId.New;
-                var newTicket= new Ticket(Guid.NewGuid(), Title,Description,PhoneNumber,CloseComment,Email);
+                var ticket= new Ticket(identity, Title,Description,PhoneNumber,CloseComment,Email);
+                var newTicket=new Ticket(ticket);
                 var command = new AddTicket(identity,new Ticket(newTicket) );
                 await  Application.PublishAsync(command);
 

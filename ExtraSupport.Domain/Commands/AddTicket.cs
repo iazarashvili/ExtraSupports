@@ -4,12 +4,13 @@ using ExtraSupport.Domain.ValueObjects;
 
 namespace ExtraSupport.Domain.Commands
 {
-    public class AddTicket:Command<TicketAggregate,TicketId>
+    public class AddTicket : Command<MainAggregate,TicketId>
     {
         public Ticket Ticket { get; set; }
 
        
-        public AddTicket(TicketId aggregateId, Ticket ticket) : base(aggregateId)
+        public AddTicket(TicketId aggregateId, Ticket ticket) 
+            :base(aggregateId)
         {
             Ticket = ticket;
         }

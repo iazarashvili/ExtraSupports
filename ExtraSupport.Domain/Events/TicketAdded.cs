@@ -3,7 +3,7 @@ using ExtraSupport.Domain.ValueObjects;
 
 namespace ExtraSupport.Domain
 {
-    public class TicketAdded : AggregateEvent<TicketAggregate, TicketId>
+    public class TicketAdded : AggregateEvent<MainAggregate, TicketId>
     {
         public Ticket Ticket { get; set; }
 
