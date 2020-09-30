@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using EventFlow;
 using EventFlow.Commands;
+using EventFlow.Core;
 using EventFlow.Queries;
 using ExtraSupport.Application.ReadModels;
 using ExtraSupport.Domain.Queries;
@@ -25,6 +26,11 @@ namespace ExtraSupport.Application
             return await queryProcessor.ProcessAsync(new AllTicketsQuery(), CancellationToken.None);
         }
         public async Task PublishAsync(ICommand command)
+        {
+            await command.PublishAsync(commandBus, CancellationToken.None);
+        }
+
+        public async Task SetCloseCommentAsync(ICommand command)
         {
             await command.PublishAsync(commandBus, CancellationToken.None);
         }
