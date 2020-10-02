@@ -8,6 +8,7 @@ namespace ExtraSupport.Domain.ValueObjects
     public class Ticket:ValueObject
     {
         public TicketId TicketId { get; set; }
+        public bool Deleted { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string PhoneNumber { get; set; }

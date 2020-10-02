@@ -84,7 +84,8 @@ namespace ExtraSupports.Pages.Tickets
             if (ModelState.IsValid)
             {
                 var ticketId = Request.Form["TicketId"];
-                Guid newguid = Guid.Parse(ticketId);
+
+                await Application.DeleteTicketAsync(new TicketId(ticketId));
                 
                 return RedirectToPage("/Tickets/Index");
             }
@@ -96,7 +97,8 @@ namespace ExtraSupports.Pages.Tickets
             if (ModelState.IsValid)
             {
                 var ticketId = Request.Form["closeTicketId"];
-                Guid newguid = Guid.Parse(ticketId);
+
+                await Application.CloseTicketAsync(new TicketId(ticketId), this.CloseComment);
                 
                 return RedirectToPage("/Tickets/Index");
             }

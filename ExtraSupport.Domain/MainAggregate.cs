@@ -3,11 +3,13 @@ using System.ServiceModel.Channels;
 using EventFlow.Aggregates;
 using ExtraSupport.Domain.Events;
 using ExtraSupport.Domain.ValueObjects;
+using ExtraSupports.Enums;
 
 namespace ExtraSupport.Domain
 {
     public class MainAggregate:AggregateRoot<MainAggregate,TicketId>,
-        IApply<TicketAdded>
+        IApply<TicketAdded>,
+        IApply<TicketClosed>
     {
         public Ticket Ticket { get; set; }
 
@@ -20,9 +22,15 @@ namespace ExtraSupport.Domain
             Ticket = aggregateEvent.Ticket;
         }
 
-        public void Apply(CloseCommentSetted aggregateEvent)
+        public void Apply(TicketClosed aggregateEvent)
         {
+            this.Ticket.CloseComment = aggregateEvent.CloseComment;
+            Ticket.TicketState = TicketState.Finished;
+        }
 
+        public void Apply(TicketDeleted aggregateEvent)
+        {
+            this.Ticket.Deleted = true;
         }
 
         public void AddTicket(Ticket ticket)
@@ -30,9 +38,15 @@ namespace ExtraSupport.Domain
             Emit(new TicketAdded(ticket));
         }
 
-        public void SetCloseComment (string closeComment)
+        public void CloseTicket (string closeComment)
         {
-            Emit(new CloseCommentSetted(closeComment));
+            Emit(new TicketClosed(closeComment));
         }
+
+        public void TicketDeleted()
+        {
+            Emit(new TicketDeleted());
+        }
+
     }
 }

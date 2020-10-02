@@ -20,7 +20,7 @@ namespace ExtraSupport.Infrastructure.QueryHandler
 
         public override async Task<List<TicketReadModel>> ExecuteQueryAsync(AllTicketsQuery query, CancellationToken cancellationToken)
         {
-            var result = (await GetCollection<TicketReadModel>().FindAsync(x => x.Id != null)).ToList();
+            var result = (await GetCollection<TicketReadModel>().FindAsync(x => x.Id != null && !x.Deleted)).ToList();
             return result;
         }
     }

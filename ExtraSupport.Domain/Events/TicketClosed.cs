@@ -2,10 +2,10 @@
 
 namespace ExtraSupport.Domain.Events
 {
-    public class CloseCommentSetted : AggregateEvent<MainAggregate, TicketId>
+    public class TicketClosed : AggregateEvent<MainAggregate, TicketId>
     {
         public string CloseComment { get; }
-        public CloseCommentSetted(string closeComment)
+        public TicketClosed(string closeComment)
         {
             this.CloseComment = closeComment;
         }

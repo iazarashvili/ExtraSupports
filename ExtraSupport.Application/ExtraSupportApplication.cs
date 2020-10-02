@@ -6,6 +6,8 @@ using EventFlow.Commands;
 using EventFlow.Core;
 using EventFlow.Queries;
 using ExtraSupport.Application.ReadModels;
+using ExtraSupport.Domain;
+using ExtraSupport.Domain.Commands;
 using ExtraSupport.Domain.Queries;
 
 namespace ExtraSupport.Application
@@ -30,9 +32,17 @@ namespace ExtraSupport.Application
             await command.PublishAsync(commandBus, CancellationToken.None);
         }
 
-        public async Task SetCloseCommentAsync(ICommand command)
+        public async Task CloseTicketAsync(TicketId id, string closeComment)
         {
-            await command.PublishAsync(commandBus, CancellationToken.None);
+            var command = new CloseTicket(id, closeComment);
+            await commandBus.PublishAsync(command, CancellationToken.None);
+        }
+
+
+        public async Task DeleteTicketAsync(TicketId id)
+        {
+            var command = new DeleteTicket(id);
+            await commandBus.PublishAsync(command, CancellationToken.None);
         }
     }
 }
